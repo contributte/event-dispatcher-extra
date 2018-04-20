@@ -2,8 +2,8 @@
 
 Bridges between [`Contributte\EventDispatcher`](https://github.com/contributte/event-dispatcher) and the Nette packages.
 
-	- [`Nette\Application`](https://github.com/nette/application/)
-	- [`Nette\Security`](https://github.com/nette/security/)
+- [`Nette\Application`](https://github.com/nette/application/)
+- [`Nette\Security`](https://github.com/nette/security/)
 
 -----
 
