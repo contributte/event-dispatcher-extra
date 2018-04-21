@@ -1,9 +1,9 @@
-# Event Dispatcher > Nette Application Bridge
+# Event Dispatcher Extra :recycle:
 
 ## Content :gift:
 
 - [Usage - how to register](#usage-tada)
-- [Bridge - nette application](#bridge-wrench)
+- [Bridge - events list](#bridge-wrench)
 - [Command - example command](#subscriber-bulb)
 
 ## Usage :tada:
@@ -12,11 +12,14 @@
 extensions:
     events: Contributte\EventDispatcher\DI\EventDispatcherExtension
     events2application: Contributte\Events\Extra\Application\DI\EventApplicationBridgeExtension
+    events2security: Contributte\Events\Extra\Security\DI\EventSecurityBridgeExtension
 ```
 
 ## Bridge :wrench:
 
-There are several Nette Application events on which you can listen to.
+There are several events on which you can listen to.
+
+**Nette Application events:**
 
 ```php
 use Contributte\Events\Extra\Application\Event\ApplicationEvents;
@@ -34,6 +37,16 @@ use Contributte\Events\Extra\Application\Event\StartupEvent;
 - `PresenterEvent::NAME` && `ApplicationEvents::ON_PRESENTER`
 - `ResponseEvent::NAME` && `ApplicationEvents::ON_RESPONSE`
 - `ErrorEvent::NAME` && `ApplicationEvents::ON_ERROR`
+
+**Nette Security events:**
+
+```php
+use Contributte\Events\Extra\Security\Event\LoggedInEvent;
+use Contributte\Events\Extra\Security\Event\LoggedOutEvent;
+```
+
+- `LoggedInEvent::NAME` && `SecurityEvents::ON_LOGGED_IN`
+- `LoggedOutEvent::NAME` && `SecurityEvents::ON_LOGGED_OUT`
 
 ## Subscriber :bulb:
 
