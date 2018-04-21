@@ -33,8 +33,9 @@ composer require contributte/event-dispatcher-extra
 
 ## Overview
 
-- [Nette/Application bridge](https://github.com/contributte/event-dispatcher-extra/blob/master/.docs/application.md#usage-tada)
-- [Nette/Security bridge](https://github.com/contributte/event-dispatcher-extra/blob/master/.docs/security.md#usage-tada)
+- [Usage - how to register](https://github.com/contributte/event-dispatcher-extra/blob/master/.docs/README.md#usage-tada)
+- [Bridge - events list](https://github.com/contributte/event-dispatcher-extra/blob/master/.docs/README.md#bridge-wrench)
+- [Command - example command](https://github.com/contributte/event-dispatcher-extra/blob/master/.docs/README.md#subscriber-bulb)
 
 ## Maintainers
 
