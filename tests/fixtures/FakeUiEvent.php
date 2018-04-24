@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Fixtures;
 
-use Contributte\Events\Extra\Application\UI\UIEvent;
+use Contributte\Events\Extra\Event\UI\UIEvent;
 
-/**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- */
 final class FakeUiEvent extends UIEvent
 {
 

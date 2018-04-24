@@ -1,74 +1,61 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Fixtures;
 
+use DateTimeInterface;
 use Nette\Security\IIdentity;
 use Nette\Security\IUserStorage;
 
-/**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- */
 final class FakeUserStorage implements IUserStorage
 {
 
 	/**
 	 * Sets the authenticated status of this user.
 	 *
-	 * @param bool $state
-	 * @return void
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
 	 */
-	public function setAuthenticated($state)
+	public function setAuthenticated($state): void
 	{
 	}
 
 	/**
 	 * Is this user authenticated?
-	 *
-	 * @return bool
 	 */
-	public function isAuthenticated()
+	public function isAuthenticated(): bool
 	{
-		return FALSE;
+		return false;
 	}
 
 	/**
 	 * Sets the user identity.
-	 *
-	 * @param IIdentity $identity
-	 * @return void
 	 */
-	public function setIdentity(IIdentity $identity = NULL)
+	public function setIdentity(?IIdentity $identity = null): void
 	{
 		// TODO: Implement setIdentity() method.
 	}
 
 	/**
 	 * Returns current user identity, if any.
-	 *
-	 * @return IIdentity|NULL
 	 */
-	public function getIdentity()
+	public function getIdentity(): ?IIdentity
 	{
-		return NULL;
+		return null;
 	}
 
 	/**
 	 * Enables log out from the persistent storage after inactivity.
 	 *
-	 * @param  string|int|\DateTimeInterface $time number of seconds or timestamp
-	 * @param  int $flags Clear the identity from persistent storage?
-	 * @return void
+	 * @param  string|int|DateTimeInterface $time  number of seconds or timestamp
+	 * @param  int                          $flags Clear the identity from persistent storage?
 	 */
-	public function setExpiration($time, $flags = 0)
+	public function setExpiration($time, $flags = 0): void
 	{
 	}
 
 	/**
 	 * Why was user logged out?
-	 *
-	 * @return int
 	 */
-	public function getLogoutReason()
+	public function getLogoutReason(): int
 	{
 		return 0;
 	}

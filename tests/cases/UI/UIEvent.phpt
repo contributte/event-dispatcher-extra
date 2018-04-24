@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Test: UI/UIEvent
@@ -10,7 +10,7 @@ use Tests\Fixtures\FakeUiEvent;
 require_once __DIR__ . '/../../bootstrap.php';
 
 // Success message
-test(function () {
+test(function (): void {
 	$event = new FakeUiEvent();
 	$event->getUi()->addSuccessMessage('All clear');
 

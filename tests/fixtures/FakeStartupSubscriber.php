@@ -1,13 +1,10 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Fixtures;
 
 use Contributte\EventDispatcher\EventSubscriber;
-use Contributte\Events\Extra\Application\Event\StartupEvent;
+use Contributte\Events\Extra\Event\Application\StartupEvent;
 
-/**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- */
 final class FakeStartupSubscriber implements EventSubscriber
 {
 
@@ -15,18 +12,14 @@ final class FakeStartupSubscriber implements EventSubscriber
 	public $onCall = [];
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
-	public static function getSubscribedEvents()
+	public static function getSubscribedEvents(): array
 	{
 		return [StartupEvent::NAME => 'onStartup'];
 	}
 
-	/**
-	 * @param StartupEvent $event
-	 * @return void
-	 */
-	public function onStartup(StartupEvent $event)
+	public function onStartup(StartupEvent $event): void
 	{
 		$this->onCall[] = $event;
 	}

@@ -1,36 +1,32 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Contributte\Events\Extra\Security\DI;
+namespace Contributte\Events\Extra\DI;
 
-use Contributte\Events\Extra\Security\Event\LoggedInEvent;
-use Contributte\Events\Extra\Security\Event\LoggedOutEvent;
-use Contributte\Events\Extra\Security\Event\SecurityEvents;
+use Contributte\Events\Extra\Event\Security\LoggedInEvent;
+use Contributte\Events\Extra\Event\Security\LoggedOutEvent;
+use Contributte\Events\Extra\Event\Security\SecurityEvents;
 use LogicException;
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\PhpLiteral;
 use Nette\Security\User;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use function sprintf;
 
-/**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- */
 class EventSecurityBridgeExtension extends CompilerExtension
 {
 
 	/**
 	 * Build bridge into nette application events
-	 *
-	 * @return void
 	 */
-	public function beforeCompile()
+	public function beforeCompile(): void
 	{
 		$builder = $this->getContainerBuilder();
 
-		if (!$builder->getByType(User::class)) {
+		if ($builder->getByType(User::class) === null) {
 			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', User::class));
 		}
 
-		if (!$builder->getByType(EventDispatcher::class)) {
+		if ($builder->getByType(EventDispatcher::class) === null) {
 			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', EventDispatcher::class));
 		}
 

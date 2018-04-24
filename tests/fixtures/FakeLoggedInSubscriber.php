@@ -1,14 +1,11 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Fixtures;
 
 use Contributte\EventDispatcher\EventSubscriber;
-use Contributte\Events\Extra\Security\Event\LoggedInEvent;
-use Contributte\Events\Extra\Security\Event\SecurityEvents;
+use Contributte\Events\Extra\Event\Security\LoggedInEvent;
+use Contributte\Events\Extra\Event\Security\SecurityEvents;
 
-/**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- */
 final class FakeLoggedInSubscriber implements EventSubscriber
 {
 
@@ -16,18 +13,14 @@ final class FakeLoggedInSubscriber implements EventSubscriber
 	public $onCall = [];
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
-	public static function getSubscribedEvents()
+	public static function getSubscribedEvents(): array
 	{
 		return [SecurityEvents::ON_LOGGED_IN => 'onLoggedIn'];
 	}
 
-	/**
-	 * @param LoggedInEvent $event
-	 * @return void
-	 */
-	public function onLoggedIn(LoggedInEvent $event)
+	public function onLoggedIn(LoggedInEvent $event): void
 	{
 		$this->onCall[] = $event;
 	}

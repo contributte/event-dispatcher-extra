@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Test: DI\EventSecurityBridgeExtension
  */
 
 use Contributte\EventDispatcher\DI\EventDispatcherExtension;
-use Contributte\Events\Extra\Security\DI\EventSecurityBridgeExtension;
+use Contributte\Events\Extra\DI\EventSecurityBridgeExtension;
 use Nette\Bridges\SecurityDI\SecurityExtension;
 use Nette\DI\Compiler;
 use Nette\DI\Container;
@@ -18,18 +18,18 @@ use Tests\Fixtures\FakeLoggedInSubscriber;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-test(function () {
-	Assert::exception(function () {
-		$loader = new ContainerLoader(TEMP_DIR, TRUE);
-		$loader->load(function (Compiler $compiler) {
+test(function (): void {
+	Assert::exception(function (): void {
+		$loader = new ContainerLoader(TEMP_DIR, true);
+		$loader->load(function (Compiler $compiler): void {
 			$compiler->addExtension('events2security', new EventSecurityBridgeExtension());
 		}, 1);
 	}, LogicException::class, 'Service of type "Nette\Security\User" is needed. Please register it.');
 });
 
-test(function () {
-	$loader = new ContainerLoader(TEMP_DIR, TRUE);
-	$class = $loader->load(function (Compiler $compiler) {
+test(function (): void {
+	$loader = new ContainerLoader(TEMP_DIR, true);
+	$class = $loader->load(function (Compiler $compiler): void {
 		$compiler->loadConfig(FileMock::create('
 			services:
 				security.userStorage: Tests\Fixtures\FakeUserStorage
@@ -41,7 +41,7 @@ test(function () {
 	}, 2);
 
 	/** @var Container $container */
-	$container = new $class;
+	$container = new $class();
 
 	// Subscriber is still not created
 	Assert::false($container->isCreated('fake.loggedin.subscriber'));
