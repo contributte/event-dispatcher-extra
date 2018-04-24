@@ -1,64 +1,58 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Contributte\Events\Extra\Application\UI;
+namespace Contributte\Events\Extra\Event\UI;
 
 use ArrayIterator;
 use Contributte\EventDispatcher\Exceptions\Logical\InvalidStateException;
 use IteratorAggregate;
+use function array_key_exists;
+use function sprintf;
 
-/**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- */
 class Changeset implements IteratorAggregate
 {
 
-	/** @var array */
+	/** @var mixed[] */
 	private $changeset = [];
 
 	/**
-	 * @param string $key
-	 * @param mixed $value
-	 * @return void
+	 * @param string|int $key
+	 * @param mixed      $value
 	 */
-	public function add($key, $value)
+	public function add($key, $value): void
 	{
 		$this->changeset[$key] = $value;
 	}
 
 	/**
-	 * @param string $key
-	 * @return bool
+	 * @param string|int $key
 	 */
-	public function has($key)
+	public function has($key): bool
 	{
 		return array_key_exists($key, $this->changeset);
 	}
 
 	/**
-	 * @param string $key
+	 * @param string|int $key
 	 * @return mixed
 	 */
 	public function get($key)
 	{
 		if (!$this->has($key)) {
-			throw new InvalidStateException(sprintf('Key %s does not exist in this changeset', $key));
+			throw new InvalidStateException(sprintf('Key %s does not exist in this changeset', (string) $key));
 		}
 
 		return $this->changeset[$key];
 	}
 
 	/**
-	 * @return array
+	 * @return mixed[]
 	 */
-	public function all()
+	public function all(): array
 	{
 		return $this->changeset;
 	}
 
-	/**
-	 * @return ArrayIterator
-	 */
-	public function getIterator()
+	public function getIterator(): ArrayIterator
 	{
 		return new ArrayIterator($this->changeset);
 	}

@@ -7,18 +7,20 @@
   "homepage": "https://github.com/contributte/event-dispatcher-extra",
   "authors": [
     {
-      "name": "Milan Felix Sulc",
+      "name": "Milan Felix Šulc",
       "homepage": "https://f3l1x.io"
     }
   ],
   "require": {
-    "php": ">= 5.6",
-    "nette/di": "^2.4.8",
-    "nette/application": "^2.4.6.",
-    "nette/security": "^2.4.1"
+    "php": ">= 7.1",
+    "nette/di": "~2.4.11",
+    "nette/utils": "~2.5.1"
   },
   "require-dev": {
-    "ninjify/qa": "^0.4.0",
+    "nette/application": "~2.4.11",
+    "nette/security": "~2.4.3",
+    "nette/http": "~2.4.8",
+    "ninjify/qa": "^0.8.0",
     "ninjify/nunjuck": "^0.2.0",
     "contributte/event-dispatcher": "^0.3.0"
   },
@@ -32,16 +34,27 @@
       "Tests\\Fixtures\\": "tests/fixtures"
     }
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "scripts": {
     "qa": [
       "linter src tests",
       "codesniffer src tests"
     ],
     "tester": [
-      "tester -s -p php --colors 1 -c tests/php-unix.ini tests/cases"
+      "tester -s -p php --colors 1 -C tests/cases"
     ],
-    "tester-coverage": [
-      "tester -s -p php --colors 1 -c tests/php-unix.ini -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src tests/cases "
+    "coverage": [
+      "tester -s -p php --colors 1 -C -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src tests/cases "
+    ],
+    "phpstan-install": [
+      "mkdir -p temp/phpstan",
+      "composer require -d temp/phpstan phpstan/phpstan:0.9.2",
+      "composer require -d temp/phpstan phpstan/phpstan-nette:0.9",
+      "composer require -d temp/phpstan phpstan/phpstan-strict-rules:0.9"
+    ],
+    "phpstan": [
+      "temp/phpstan/vendor/bin/phpstan analyse -l max -c phpstan.neon src"
     ]
   }
 }

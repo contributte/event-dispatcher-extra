@@ -11,8 +11,13 @@
 ```yaml
 extensions:
     events: Contributte\EventDispatcher\DI\EventDispatcherExtension
-    events2application: Contributte\Events\Extra\Application\DI\EventApplicationBridgeExtension
-    events2security: Contributte\Events\Extra\Security\DI\EventSecurityBridgeExtension
+    
+    # register all event bridges
+    eventsExtras: Contributte\Events\Extra\DI\EventBridgesExtension
+    
+    # register only bridges of your choice
+    events2application: Contributte\Events\Extra\DI\EventApplicationBridgeExtension
+    events2security: Contributte\Events\Extra\DI\EventSecurityBridgeExtension
 ```
 
 ## Bridge :wrench:
@@ -22,13 +27,13 @@ There are several events on which you can listen to.
 **Nette Application events:**
 
 ```php
-use Contributte\Events\Extra\Application\Event\ApplicationEvents;
-use Contributte\Events\Extra\Application\Event\ErrorEvent;
-use Contributte\Events\Extra\Application\Event\PresenterEvent;
-use Contributte\Events\Extra\Application\Event\RequestEvent;
-use Contributte\Events\Extra\Application\Event\ResponseEvent;
-use Contributte\Events\Extra\Application\Event\ShutdownEvent;
-use Contributte\Events\Extra\Application\Event\StartupEvent;
+use Contributte\Events\Extra\Event\Application\ApplicationEvents;
+use Contributte\Events\Extra\Event\Application\ErrorEvent;
+use Contributte\Events\Extra\Event\Application\PresenterEvent;
+use Contributte\Events\Extra\Event\Application\RequestEvent;
+use Contributte\Events\Extra\Event\Application\ResponseEvent;
+use Contributte\Events\Extra\Event\Application\ShutdownEvent;
+use Contributte\Events\Extra\Event\Application\StartupEvent;
 ```
 
 - `StartupEvent::NAME` && `ApplicationEvents::ON_STARTUP`
@@ -41,8 +46,8 @@ use Contributte\Events\Extra\Application\Event\StartupEvent;
 **Nette Security events:**
 
 ```php
-use Contributte\Events\Extra\Security\Event\LoggedInEvent;
-use Contributte\Events\Extra\Security\Event\LoggedOutEvent;
+use Contributte\Events\Extra\Event\Security\LoggedInEvent;
+use Contributte\Events\Extra\Event\Security\LoggedOutEvent;
 ```
 
 - `LoggedInEvent::NAME` && `SecurityEvents::ON_LOGGED_IN`
@@ -52,26 +57,19 @@ use Contributte\Events\Extra\Security\Event\LoggedOutEvent;
 
 ```php
 use Contributte\EventDispatcher\EventSubscriber;
-use Contributte\Events\Extra\Application\Event\RequestEvent;
+use Contributte\Events\Extra\Event\Application\RequestEvent;
 
 final class LogRequestSubscriber implements EventSubscriber
 {
 
-	/**
-	 * @return array
-	 */
-	public static function getSubscribedEvents()
+	public static function getSubscribedEvents(): array
 	{
 		return [RequestEvent::NAME => 'onLog'];
 	}
 
-	/**
-	 * @param RequestEvent $event
-	 * @return void
-	 */
-	public function onLog(RequestEvent $event)
+	public function onLog(RequestEvent $event): void
 	{
-	    // Do magic..
+		// Do magic..
 	}
 }
 ```

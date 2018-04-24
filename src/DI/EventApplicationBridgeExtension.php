@@ -1,40 +1,36 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Contributte\Events\Extra\Application\DI;
+namespace Contributte\Events\Extra\DI;
 
-use Contributte\Events\Extra\Application\Event\ApplicationEvents;
-use Contributte\Events\Extra\Application\Event\ErrorEvent;
-use Contributte\Events\Extra\Application\Event\PresenterEvent;
-use Contributte\Events\Extra\Application\Event\RequestEvent;
-use Contributte\Events\Extra\Application\Event\ResponseEvent;
-use Contributte\Events\Extra\Application\Event\ShutdownEvent;
-use Contributte\Events\Extra\Application\Event\StartupEvent;
+use Contributte\Events\Extra\Event\Application\ApplicationEvents;
+use Contributte\Events\Extra\Event\Application\ErrorEvent;
+use Contributte\Events\Extra\Event\Application\PresenterEvent;
+use Contributte\Events\Extra\Event\Application\RequestEvent;
+use Contributte\Events\Extra\Event\Application\ResponseEvent;
+use Contributte\Events\Extra\Event\Application\ShutdownEvent;
+use Contributte\Events\Extra\Event\Application\StartupEvent;
 use LogicException;
 use Nette\Application\Application;
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\PhpLiteral;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use function sprintf;
 
-/**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- */
 class EventApplicationBridgeExtension extends CompilerExtension
 {
 
 	/**
 	 * Build bridge into nette application events
-	 *
-	 * @return void
 	 */
-	public function beforeCompile()
+	public function beforeCompile(): void
 	{
 		$builder = $this->getContainerBuilder();
 
-		if (!$builder->getByType(Application::class)) {
+		if ($builder->getByType(Application::class) === null) {
 			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', Application::class));
 		}
 
-		if (!$builder->getByType(EventDispatcher::class)) {
+		if ($builder->getByType(EventDispatcher::class) === null) {
 			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', EventDispatcher::class));
 		}
 

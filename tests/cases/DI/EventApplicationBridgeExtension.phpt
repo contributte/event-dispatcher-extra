@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Test: DI\EventApplicationBridgeExtension
  */
 
 use Contributte\EventDispatcher\DI\EventDispatcherExtension;
-use Contributte\Events\Extra\Application\DI\EventApplicationBridgeExtension;
+use Contributte\Events\Extra\DI\EventApplicationBridgeExtension;
 use Nette\Application\Application;
 use Nette\Bridges\ApplicationDI\ApplicationExtension;
 use Nette\Bridges\HttpDI\HttpExtension;
@@ -18,18 +18,18 @@ use Tests\Fixtures\FakeStartupSubscriber;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-test(function () {
-	Assert::exception(function () {
-		$loader = new ContainerLoader(TEMP_DIR, TRUE);
-		$loader->load(function (Compiler $compiler) {
+test(function (): void {
+	Assert::exception(function (): void {
+		$loader = new ContainerLoader(TEMP_DIR, true);
+		$loader->load(function (Compiler $compiler): void {
 			$compiler->addExtension('events2application', new EventApplicationBridgeExtension());
 		}, 1);
 	}, LogicException::class, 'Service of type "Nette\Application\Application" is needed. Please register it.');
 });
 
-test(function () {
-	$loader = new ContainerLoader(TEMP_DIR, TRUE);
-	$class = $loader->load(function (Compiler $compiler) {
+test(function (): void {
+	$loader = new ContainerLoader(TEMP_DIR, true);
+	$class = $loader->load(function (Compiler $compiler): void {
 		$compiler->loadConfig(FileMock::create('
 			services:
 				- Nette\Application\Routers\RouteList
@@ -42,7 +42,7 @@ test(function () {
 	}, 2);
 
 	/** @var Container $container */
-	$container = new $class;
+	$container = new $class();
 
 	// Subscriber is still not created
 	Assert::false($container->isCreated('fake.startup.subscriber'));
