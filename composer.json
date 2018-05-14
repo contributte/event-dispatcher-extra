@@ -1,9 +1,21 @@
 {
   "name": "contributte/event-dispatcher-extra",
   "description": "Nette-based Symfony events for application, presenter, form, latte, templates, security and many others.",
-  "keywords": ["nette", "event", "dispatcher", "bridge", "application", "security", "form", "latte", "template"],
+  "keywords": [
+    "nette",
+    "event",
+    "dispatcher",
+    "bridge",
+    "application",
+    "security",
+    "form",
+    "latte",
+    "template"
+  ],
   "type": "library",
-  "license": ["MIT"],
+  "license": [
+    "MIT"
+  ],
   "homepage": "https://github.com/contributte/event-dispatcher-extra",
   "authors": [
     {
@@ -17,6 +29,7 @@
     "nette/utils": "~2.5.1"
   },
   "require-dev": {
+    "latte/latte": "~2.4.7",
     "nette/application": "~2.4.11",
     "nette/security": "~2.4.3",
     "nette/http": "~2.4.8",
@@ -37,6 +50,15 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
+    "ci": [
+      "@tester",
+      "@phpstan",
+      "@qa",
+      "@coverage"
+    ],
+    "fix-style": [
+      "vendor/bin/codefixer"
+    ],
     "qa": [
       "linter src tests",
       "codesniffer src tests"

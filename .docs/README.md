@@ -11,13 +11,14 @@
 ```yaml
 extensions:
     events: Contributte\EventDispatcher\DI\EventDispatcherExtension
-    
+
     # register all event bridges
     eventsExtras: Contributte\Events\Extra\DI\EventBridgesExtension
-    
+
     # register only bridges of your choice
     events2application: Contributte\Events\Extra\DI\EventApplicationBridgeExtension
     events2security: Contributte\Events\Extra\DI\EventSecurityBridgeExtension
+    events2latte: Contributte\Events\Extra\DI\EventLatteBridgeExtension
 ```
 
 ## Bridge :wrench:
@@ -30,6 +31,8 @@ There are several events on which you can listen to.
 use Contributte\Events\Extra\Event\Application\ApplicationEvents;
 use Contributte\Events\Extra\Event\Application\ErrorEvent;
 use Contributte\Events\Extra\Event\Application\PresenterEvent;
+use Contributte\Events\Extra\Event\Application\PresenterStartupEvent;
+use Contributte\Events\Extra\Event\Application\PresenterShutdownEvent;
 use Contributte\Events\Extra\Event\Application\RequestEvent;
 use Contributte\Events\Extra\Event\Application\ResponseEvent;
 use Contributte\Events\Extra\Event\Application\ShutdownEvent;
@@ -40,8 +43,19 @@ use Contributte\Events\Extra\Event\Application\StartupEvent;
 - `ShutdownEvent::NAME` && `ApplicationEvents::ON_SHUTDOWN`
 - `RequestEvent::NAME` && `ApplicationEvents::ON_REQUEST`
 - `PresenterEvent::NAME` && `ApplicationEvents::ON_PRESENTER`
+- `PresenterStartupEvent::NAME` && `ApplicationEvents::ON_PRESENTER_STARTUP`
+- `PresenterShutdownEvent::NAME` && `ApplicationEvents::ON_PRESENTER_SHUTDOWN`
 - `ResponseEvent::NAME` && `ApplicationEvents::ON_RESPONSE`
 - `ErrorEvent::NAME` && `ApplicationEvents::ON_ERROR`
+
+**Nette Application (Latte) events:**
+
+```php
+use Contributte\Events\Extra\Event\Latte\LatteEvents;
+use Contributte\Events\Extra\Event\Latte\LatteCompileEvent;
+```
+
+- `LatteCompileEvent::NAME` && `LatteEvents::ON_LATTE_COMPILE`
 
 **Nette Security events:**
 

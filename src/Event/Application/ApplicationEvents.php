@@ -26,6 +26,16 @@ interface ApplicationEvents
 	public const ON_PRESENTER = 'nette.application.presenter';
 
 	/**
+	 * Occurs when a presenter is starting
+	 */
+	public const ON_PRESENTER_STARTUP = 'nette.application.presenter.startup';
+
+	/**
+	 * Occurs when a presenter is shutting down
+	 */
+	public const ON_PRESENTER_SHUTDOWN = 'nette.application.presenter.shutdown';
+
+	/**
 	 * Occurs when a new response is received
 	 */
 	public const ON_RESPONSE = 'nette.application.response';

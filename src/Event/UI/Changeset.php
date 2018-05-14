@@ -5,8 +5,6 @@ namespace Contributte\Events\Extra\Event\UI;
 use ArrayIterator;
 use Contributte\EventDispatcher\Exceptions\Logical\InvalidStateException;
 use IteratorAggregate;
-use function array_key_exists;
-use function sprintf;
 
 class Changeset implements IteratorAggregate
 {

@@ -10,7 +10,6 @@ use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\PhpLiteral;
 use Nette\Security\User;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use function sprintf;
 
 class EventSecurityBridgeExtension extends CompilerExtension
 {

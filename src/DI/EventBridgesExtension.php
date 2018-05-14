@@ -12,12 +12,14 @@ class EventBridgesExtension extends CompilerExtension
 	/** @var mixed[] */
 	private $defaults = [
 		'application' => [],
+		'latte' => [],
 		'security' => [],
 	];
 
 	/** @var string[] */
 	private $map = [
 		'application' => EventApplicationBridgeExtension::class,
+		'latte' => EventLatteBridgeExtension::class,
 		'security' => EventSecurityBridgeExtension::class,
 	];
 
@@ -32,7 +34,9 @@ class EventBridgesExtension extends CompilerExtension
 		$config = $this->validateConfig($this->defaults, $this->config);
 		foreach ($config as $bridge => $enabled) {
 			// Don't register sub extension
-			if ($enabled === false) continue;
+			if ($enabled === false) {
+				continue;
+			}
 
 			// Security check
 			Validators::assertField($config, $bridge, 'array');
