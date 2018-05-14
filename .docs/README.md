@@ -47,19 +47,6 @@ use Contributte\Events\Extra\Event\Application\StartupEvent;
 - `ResponseEvent::NAME` && `ApplicationEvents::ON_RESPONSE`
 - `ErrorEvent::NAME` && `ApplicationEvents::ON_ERROR`
 
-**Contributte Application events:**
-
-```php
-use Contributte\Events\Extra\Event\Application\ApplicationEvents;
-use Contributte\Events\Extra\Event\Application\LatteCompileEvent;
-use Contributte\Events\Extra\Event\Application\TemplateCreateEvent;
-use Contributte\Events\Extra\Event\Application\FormBeforeRenderEvent;
-```
-
-- `LatteCompileEvent::NAME` && `ApplicationEvents::ON_LATTE_COMPILE`
-- `TemplateCreateEvent::NAME` && `ApplicationEvents::ON_TEMPLATE_CREATE`
-- `FormBeforeRenderEvent::NAME` && `ApplicationEvents:ON_FORM_BEFORE_RENDER`
-
 **Nette Security events:**
 
 ```php

@@ -45,19 +45,4 @@ interface ApplicationEvents
 	 */
 	public const ON_ERROR = 'nette.application.error';
 
-	/**
-	 * Occurs before template is created
-	 */
-	public const ON_TEMPLATE_CREATE = 'contributte.application.templateCreate';
-
-	/**
-	 * Occurs before latte file is compiled
-	 */
-	public const ON_LATTE_COMPILE = 'contributte.application.latteCompile';
-
-	/**
-	 * Occurs before the form is rendered
-	 */
-	public const ON_FORM_BEFORE_RENDER = 'contributte.forms.form.beforeRender';
-
 }

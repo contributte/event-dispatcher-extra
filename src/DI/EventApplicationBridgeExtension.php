@@ -4,7 +4,6 @@ namespace Contributte\Events\Extra\DI;
 
 use Contributte\Events\Extra\Event\Application\ApplicationEvents;
 use Contributte\Events\Extra\Event\Application\ErrorEvent;
-use Contributte\Events\Extra\Event\Application\LatteCompileEvent;
 use Contributte\Events\Extra\Event\Application\PresenterEvent;
 use Contributte\Events\Extra\Event\Application\PresenterShutdownEvent;
 use Contributte\Events\Extra\Event\Application\PresenterStartupEvent;
@@ -12,16 +11,11 @@ use Contributte\Events\Extra\Event\Application\RequestEvent;
 use Contributte\Events\Extra\Event\Application\ResponseEvent;
 use Contributte\Events\Extra\Event\Application\ShutdownEvent;
 use Contributte\Events\Extra\Event\Application\StartupEvent;
-use Contributte\Events\Extra\Event\Application\TemplateCreateEvent;
-use Contributte\Events\Extra\Latte\TemplateFactory;
 use LogicException;
 use Nette\Application\Application;
-use Nette\Application\UI\Presenter;
-use Nette\Bridges\ApplicationLatte\ILatteFactory;
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\PhpLiteral;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use function sprintf;
 
 class EventApplicationBridgeExtension extends CompilerExtension
 {
@@ -66,6 +60,20 @@ class EventApplicationBridgeExtension extends CompilerExtension
 			new PhpLiteral(PresenterEvent::class),
 		]);
 
+		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!property_exists($presenter, "onStartup")){return;} $presenter->onStartup[] = function() {?->dispatch(?, new ?(...func_get_args()));};}', [
+			'@self',
+			$dispatcher,
+			ApplicationEvents::ON_PRESENTER_STARTUP,
+			new PhpLiteral(PresenterStartupEvent::class),
+		]);
+
+		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!property_exists($presenter, "onShutdown")){return;} $presenter->onShutdown[] = function() {?->dispatch(?, new ?(...func_get_args()));};}', [
+			'@self',
+			$dispatcher,
+			ApplicationEvents::ON_PRESENTER_SHUTDOWN,
+			new PhpLiteral(PresenterShutdownEvent::class),
+		]);
+
 		$application->addSetup('?->onRequest[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
@@ -86,46 +94,6 @@ class EventApplicationBridgeExtension extends CompilerExtension
 			ApplicationEvents::ON_SHUTDOWN,
 			new PhpLiteral(ShutdownEvent::class),
 		]);
-
-		$presenters = $builder->findByType(Presenter::class);
-
-		foreach ($presenters as $presenter) {
-			$presenter->addSetup('?->onStartup[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
-				'@self',
-				$dispatcher,
-				ApplicationEvents::ON_PRESENTER_STARTUP,
-				new PhpLiteral(PresenterStartupEvent::class),
-			]);
-			$presenter->addSetup('?->onShutdown[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
-				'@self',
-				$dispatcher,
-				ApplicationEvents::ON_PRESENTER_SHUTDOWN,
-				new PhpLiteral(PresenterShutdownEvent::class),
-			]);
-		}
-
-		$latteEngineName = $builder->getByType(ILatteFactory::class);
-
-		if ($latteEngineName !== null) {
-			$latteEngine = $builder->getDefinition($latteEngineName);
-			$latteEngine->addSetup('?->onCompile[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
-				'@self',
-				$dispatcher,
-				ApplicationEvents::ON_LATTE_COMPILE,
-				new PhpLiteral(LatteCompileEvent::class),
-			]);
-		}
-
-		$templateFactoryName = $builder->getByType(TemplateFactory::class);
-		if ($templateFactoryName !== null) {
-			$templateFactory = $builder->getDefinition($templateFactoryName);
-			$templateFactory->addSetup('?->onCreate[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
-				'@self',
-				$dispatcher,
-				ApplicationEvents::ON_TEMPLATE_CREATE,
-				new PhpLiteral(TemplateCreateEvent::class),
-			]);
-		}
 	}
 
 }
