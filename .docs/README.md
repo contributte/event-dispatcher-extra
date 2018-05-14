@@ -18,6 +18,7 @@ extensions:
     # register only bridges of your choice
     events2application: Contributte\Events\Extra\DI\EventApplicationBridgeExtension
     events2security: Contributte\Events\Extra\DI\EventSecurityBridgeExtension
+    events2latte: Contributte\Events\Extra\DI\EventLatteBridgeExtension
 ```
 
 ## Bridge :wrench:
@@ -46,6 +47,15 @@ use Contributte\Events\Extra\Event\Application\StartupEvent;
 - `PresenterShutdownEvent::NAME` && `ApplicationEvents::ON_PRESENTER_SHUTDOWN`
 - `ResponseEvent::NAME` && `ApplicationEvents::ON_RESPONSE`
 - `ErrorEvent::NAME` && `ApplicationEvents::ON_ERROR`
+
+**Nette Application (Latte) events:**
+
+```php
+use Contributte\Events\Extra\Event\Latte\LatteEvents;
+use Contributte\Events\Extra\Event\Latte\LatteCompileEvent;
+```
+
+- `LatteCompileEvent::NAME` && `LatteEvents::ON_LATTE_COMPILE`
 
 **Nette Security events:**
 
