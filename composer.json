@@ -30,7 +30,7 @@
   },
   "require-dev": {
     "latte/latte": "~2.4.7",
-    "nette/application": "~2.4.11",
+    "nette/application": "~2.4.12",
     "nette/security": "~2.4.3",
     "nette/http": "~2.4.8",
     "ninjify/qa": "^0.8.0",
@@ -39,7 +39,7 @@
   },
   "conflict": {
     "latte/latte": "<2.4.7",
-    "nette/application": "<2.4.11",
+    "nette/application": "<2.4.12",
     "nette/security": "<2.4.3",
     "nette/http": "<2.4.8",
     "contributte/event-dispatcher": "<0.3.0"
