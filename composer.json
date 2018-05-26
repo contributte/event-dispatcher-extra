@@ -50,15 +50,6 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
-    "ci": [
-      "@tester",
-      "@phpstan",
-      "@qa",
-      "@coverage"
-    ],
-    "fix-style": [
-      "vendor/bin/codefixer"
-    ],
     "qa": [
       "linter src tests",
       "codesniffer src tests"
