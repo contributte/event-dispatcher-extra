@@ -17,7 +17,7 @@ class PresenterShutdownEvent extends Event
 	/** @var IResponse */
 	private $response;
 
-	public function __construct(Presenter $presenter, IResponse $response)
+	public function __construct(Presenter $presenter, ?IResponse $response = null)
 	{
 		$this->presenter = $presenter;
 		$this->response = $response;
