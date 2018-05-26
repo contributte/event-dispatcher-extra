@@ -37,6 +37,13 @@
     "ninjify/nunjuck": "^0.2.0",
     "contributte/event-dispatcher": "^0.3.0"
   },
+  "conflict": {
+    "latte/latte": "<2.4.7",
+    "nette/application": "<2.4.11",
+    "nette/security": "<2.4.3",
+    "nette/http": "<2.4.8",
+    "contributte/event-dispatcher": "<0.3.0"
+  },
   "autoload": {
     "psr-4": {
       "Contributte\\Events\\Extra\\": "src"
