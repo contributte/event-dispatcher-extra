@@ -30,12 +30,19 @@
   },
   "require-dev": {
     "latte/latte": "~2.4.7",
-    "nette/application": "~2.4.11",
+    "nette/application": "~2.4.12",
     "nette/security": "~2.4.3",
     "nette/http": "~2.4.8",
     "ninjify/qa": "^0.8.0",
     "ninjify/nunjuck": "^0.2.0",
     "contributte/event-dispatcher": "^0.3.0"
+  },
+  "conflict": {
+    "latte/latte": "<2.4.7",
+    "nette/application": "<2.4.12",
+    "nette/security": "<2.4.3",
+    "nette/http": "<2.4.8",
+    "contributte/event-dispatcher": "<0.3.0"
   },
   "autoload": {
     "psr-4": {
@@ -50,15 +57,6 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
-    "ci": [
-      "@tester",
-      "@phpstan",
-      "@qa",
-      "@coverage"
-    ],
-    "fix-style": [
-      "vendor/bin/codefixer"
-    ],
     "qa": [
       "linter src tests",
       "codesniffer src tests"

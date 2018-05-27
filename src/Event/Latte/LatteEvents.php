@@ -10,4 +10,9 @@ interface LatteEvents
 	 */
 	public const ON_LATTE_COMPILE = 'nette.latte.compile';
 
+	/**
+	 * Occurs before template is created
+	 */
+	public const ON_TEMPLATE_CREATE = 'nette.application.templateCreate';
+
 }

@@ -53,9 +53,11 @@ use Contributte\Events\Extra\Event\Application\StartupEvent;
 ```php
 use Contributte\Events\Extra\Event\Latte\LatteEvents;
 use Contributte\Events\Extra\Event\Latte\LatteCompileEvent;
+use Contributte\Events\Extra\Event\Latte\TemplateCreateEvent;
 ```
 
 - `LatteCompileEvent::NAME` && `LatteEvents::ON_LATTE_COMPILE`
+- `TemplateCreateEvent::NAME` && `LatteEvents::ON_TEMPLATE_CREATE`
 
 **Nette Security events:**
 
