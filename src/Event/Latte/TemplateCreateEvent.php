@@ -14,7 +14,7 @@ class TemplateCreateEvent extends Event
 	/** @var Template */
 	private $template;
 
-	/**@var Control */
+	/** @var Control */
 	private $control;
 
 	public function __construct(Template $template, Control $control)
