@@ -29,8 +29,7 @@ composer require contributte/event-dispatcher-extra
 
 | State       | Version | Branch   | PHP      |
 |-------------|---------|----------|----------|
-| dev         | `^0.4`  | `master` | `>= 7.1` |
-| stable      | `^0.3`  | `master` | `>= 7.1` |
+| stable      | `^0.4`  | `master` | `>= 7.1` |
 | stable      | `^0.1`  | `master` | `>= 5.6` |
 
 ## Overview
