@@ -60,14 +60,14 @@ class EventApplicationBridgeExtension extends CompilerExtension
 			new PhpLiteral(PresenterEvent::class),
 		]);
 
-		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!property_exists($presenter, "onStartup")){return;} $presenter->onStartup[] = function() {?->dispatch(?, new ?(...func_get_args()));};}', [
+		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!property_exists($presenter, "onStartup")){return;} $presenter->onStartup[] = function() use ($presenter) {?->dispatch(?, new ?($presenter));};}', [
 			'@self',
 			$dispatcher,
 			ApplicationEvents::ON_PRESENTER_STARTUP,
 			new PhpLiteral(PresenterStartupEvent::class),
 		]);
 
-		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!property_exists($presenter, "onShutdown")){return;} $presenter->onShutdown[] = function() {?->dispatch(?, new ?(...func_get_args()));};}', [
+		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!property_exists($presenter, "onShutdown")){return;} $presenter->onShutdown[] = function() use ($presenter) {?->dispatch(?, new ?($presenter));};}', [
 			'@self',
 			$dispatcher,
 			ApplicationEvents::ON_PRESENTER_SHUTDOWN,
