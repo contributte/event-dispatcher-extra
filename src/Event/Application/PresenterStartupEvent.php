@@ -2,7 +2,7 @@
 
 namespace Contributte\Events\Extra\Event\Application;
 
-use Nette\Application\UI\Presenter;
+use Nette\Application\IPresenter;
 use Symfony\Component\EventDispatcher\Event;
 
 class PresenterStartupEvent extends Event
@@ -10,15 +10,15 @@ class PresenterStartupEvent extends Event
 
 	public const NAME = ApplicationEvents::ON_PRESENTER_STARTUP;
 
-	/** @var Presenter */
+	/** @var IPresenter */
 	private $presenter;
 
-	public function __construct(Presenter $presenter)
+	public function __construct(IPresenter $presenter)
 	{
 		$this->presenter = $presenter;
 	}
 
-	public function getPresenter(): Presenter
+	public function getPresenter(): IPresenter
 	{
 		return $this->presenter;
 	}
