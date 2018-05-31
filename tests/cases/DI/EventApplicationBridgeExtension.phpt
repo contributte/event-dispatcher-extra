@@ -14,6 +14,9 @@ use Nette\DI\Container;
 use Nette\DI\ContainerLoader;
 use Tester\Assert;
 use Tester\FileMock;
+use Tests\Fixtures\FakePresenter;
+use Tests\Fixtures\FakePresenterShutdownSubscriber;
+use Tests\Fixtures\FakePresenterStartupSubscriber;
 use Tests\Fixtures\FakeStartupSubscriber;
 
 require_once __DIR__ . '/../../bootstrap.php';
@@ -33,7 +36,9 @@ test(function (): void {
 		$compiler->loadConfig(FileMock::create('
 			services:
 				- Nette\Application\Routers\RouteList
-				fake.startup.subscriber: Tests\Fixtures\FakeStartupSubscriber
+				fake.startup.startupSubscriber: Tests\Fixtures\FakeStartupSubscriber
+				fake.presenter.startup.startupSubscriber: Tests\Fixtures\FakePresenterStartupSubscriber
+				fake.presenter.startup.shutdownSubscriber: Tests\Fixtures\FakePresenterShutdownSubscriber
 		', 'neon'));
 		$compiler->addExtension('application', new ApplicationExtension());
 		$compiler->addExtension('http', new HttpExtension());
@@ -45,16 +50,33 @@ test(function (): void {
 	$container = new $class();
 
 	// Subscriber is still not created
-	Assert::false($container->isCreated('fake.startup.subscriber'));
+	Assert::false($container->isCreated('fake.startup.startupSubscriber'));
 
 	/** @var Application $application */
 	$application = $container->getByType(Application::class);
 	Assert::count(1, $application->onStartup);
+	Assert::count(3, $application->onPresenter); // onPresenter, onPresenterStartup, onPresenterShutdown
 
-	/** @var FakeStartupSubscriber $subscriber */
-	$subscriber = $container->getByType(FakeStartupSubscriber::class);
 	$application->run();
 
-	Assert::count(1, $subscriber->onCall);
-	Assert::equal($application, $subscriber->onCall[0]->getApplication());
+	/** @var FakeStartupSubscriber $startupSubscriber */
+	$startupSubscriber = $container->getByType(FakeStartupSubscriber::class);
+	Assert::count(1, $startupSubscriber->onCall);
+	Assert::same($application, $startupSubscriber->onCall[0]->getApplication());
+
+	$presenter = new FakePresenter();
+	$application->onPresenter($application, $presenter);
+	$presenter->onStartup($presenter);
+	$presenter->onShutdown($presenter, null);
+
+	/** @var FakePresenterStartupSubscriber $presenterStartupSubscriber */
+	$presenterStartupSubscriber = $container->getByType(FakePresenterStartupSubscriber::class);
+	Assert::count(1, $presenterStartupSubscriber->onCall);
+	Assert::same($presenter, $presenterStartupSubscriber->onCall[0]->getPresenter());
+
+	/** @var FakePresenterShutdownSubscriber $presenterShutdownSubscriber */
+	$presenterShutdownSubscriber = $container->getByType(FakePresenterShutdownSubscriber::class);
+	Assert::count(1, $presenterShutdownSubscriber->onCall);
+	Assert::same($presenter, $presenterShutdownSubscriber->onCall[0]->getPresenter());
+	Assert::null($presenterShutdownSubscriber->onCall[0]->getResponse());
 });
