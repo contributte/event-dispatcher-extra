@@ -2,8 +2,8 @@
 
 namespace Contributte\Events\Extra\Event\Application;
 
+use Nette\Application\IPresenter;
 use Nette\Application\IResponse;
-use Nette\Application\UI\Presenter;
 use Symfony\Component\EventDispatcher\Event;
 
 class PresenterShutdownEvent extends Event
@@ -11,19 +11,19 @@ class PresenterShutdownEvent extends Event
 
 	public const NAME = ApplicationEvents::ON_PRESENTER_SHUTDOWN;
 
-	/** @var Presenter */
+	/** @var IPresenter */
 	private $presenter;
 
 	/** @var IResponse|null */
 	private $response;
 
-	public function __construct(Presenter $presenter, ?IResponse $response = null)
+	public function __construct(IPresenter $presenter, ?IResponse $response = null)
 	{
 		$this->presenter = $presenter;
 		$this->response = $response;
 	}
 
-	public function getPresenter(): Presenter
+	public function getPresenter(): IPresenter
 	{
 		return $this->presenter;
 	}
