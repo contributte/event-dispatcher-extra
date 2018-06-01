@@ -25,24 +25,24 @@
   ],
   "require": {
     "php": ">= 7.1",
-    "nette/di": "~2.4.11",
-    "nette/utils": "~2.5.1"
+    "nette/di": "~2.4.12",
+    "nette/utils": "~2.5.2"
   },
   "require-dev": {
+    "ninjify/qa": "^0.8.0",
+    "ninjify/nunjuck": "^0.2.0",
     "latte/latte": "~2.4.7",
     "nette/application": "~2.4.12",
     "nette/security": "~2.4.3",
-    "nette/http": "~2.4.8",
-    "ninjify/qa": "^0.8.0",
-    "ninjify/nunjuck": "^0.2.0",
-    "contributte/event-dispatcher": "^0.3.0"
+    "nette/http": "~2.4.9",
+    "contributte/event-dispatcher": "^0.3.1"
   },
   "conflict": {
     "latte/latte": "<2.4.7",
     "nette/application": "<2.4.12",
     "nette/security": "<2.4.3",
-    "nette/http": "<2.4.8",
-    "contributte/event-dispatcher": "<0.3.0"
+    "nette/http": "<2.4.9",
+    "contributte/event-dispatcher": "<0.3.1"
   },
   "autoload": {
     "psr-4": {
@@ -65,7 +65,7 @@
       "tester -s -p php --colors 1 -C tests/cases"
     ],
     "coverage": [
-      "tester -s -p php --colors 1 -C -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src tests/cases "
+      "tester -s -p php --colors 1 -C -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src tests/cases"
     ],
     "phpstan-install": [
       "mkdir -p temp/phpstan",
