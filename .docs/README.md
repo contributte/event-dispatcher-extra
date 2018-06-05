@@ -13,12 +13,23 @@ extensions:
     events: Contributte\EventDispatcher\DI\EventDispatcherExtension
 
     # register all event bridges
-    eventsExtras: Contributte\Events\Extra\DI\EventBridgesExtension
+    events.extra: Contributte\Events\Extra\DI\EventBridgesExtension
 
+events.extra:
+    # optionally disable these bridges
+    application: false
+    security: false
+    latte: false
+```
+
+You can also register bridges one by one.
+
+```yaml
+extensions:
     # register only bridges of your choice
-    events2application: Contributte\Events\Extra\DI\EventApplicationBridgeExtension
-    events2security: Contributte\Events\Extra\DI\EventSecurityBridgeExtension
-    events2latte: Contributte\Events\Extra\DI\EventLatteBridgeExtension
+    events.application: Contributte\Events\Extra\DI\EventApplicationBridgeExtension
+    events.security: Contributte\Events\Extra\DI\EventSecurityBridgeExtension
+    events.latte: Contributte\Events\Extra\DI\EventLatteBridgeExtension
 ```
 
 ## Bridge :wrench:
@@ -48,7 +59,7 @@ use Contributte\Events\Extra\Event\Application\StartupEvent;
 - `ResponseEvent::NAME` && `ApplicationEvents::ON_RESPONSE`
 - `ErrorEvent::NAME` && `ApplicationEvents::ON_ERROR`
 
-**Nette Application (Latte) events:**
+**Nette Latte events:**
 
 ```php
 use Contributte\Events\Extra\Event\Latte\LatteEvents;
@@ -78,14 +89,14 @@ use Contributte\Events\Extra\Event\Application\RequestEvent;
 final class LogRequestSubscriber implements EventSubscriber
 {
 
-	public static function getSubscribedEvents(): array
-	{
-		return [RequestEvent::NAME => 'onLog'];
-	}
+    public static function getSubscribedEvents(): array
+    {
+        return [RequestEvent::NAME => 'onLog'];
+    }
 
-	public function onLog(RequestEvent $event): void
-	{
-		// Do magic..
-	}
+    public function onLog(RequestEvent $event): void
+    {
+        // Do magic..
+    }
 }
 ```
