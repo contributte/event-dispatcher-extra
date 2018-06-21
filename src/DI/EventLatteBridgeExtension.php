@@ -6,6 +6,7 @@ use Contributte\Events\Extra\Event\Latte\LatteCompileEvent;
 use Contributte\Events\Extra\Event\Latte\LatteEvents;
 use Contributte\Events\Extra\Event\Latte\TemplateCreateEvent;
 use LogicException;
+use Nette\Application\UI\ITemplateFactory;
 use Nette\Bridges\ApplicationLatte\ILatteFactory;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\DI\CompilerExtension;
@@ -37,9 +38,13 @@ class EventLatteBridgeExtension extends CompilerExtension
 			new PhpLiteral(LatteCompileEvent::class),
 		]);
 
-		$templateFactoryName = $builder->getByType(TemplateFactory::class);
+		$templateFactoryName = $builder->getByType(ITemplateFactory::class);
 		if ($templateFactoryName !== null) {
 			$templateFactory = $builder->getDefinition($templateFactoryName);
+			if ($templateFactory->factory !== null && $templateFactory->factory->entity !== TemplateFactory::class) {
+				throw new LogicException(sprintf('Service "%s" must be instance of "%s" to support TemplateCreateEvent.', $templateFactoryName, TemplateFactory::class));
+			}
+
 			$templateFactory->addSetup('?->onCreate[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 				'@self',
 				$dispatcher,
