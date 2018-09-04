@@ -15,7 +15,7 @@ use LogicException;
 use Nette\Application\Application;
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\PhpLiteral;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EventApplicationBridgeExtension extends CompilerExtension
 {
@@ -31,11 +31,11 @@ class EventApplicationBridgeExtension extends CompilerExtension
 			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', Application::class));
 		}
 
-		if ($builder->getByType(EventDispatcher::class) === null) {
-			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', EventDispatcher::class));
+		if ($builder->getByType(EventDispatcherInterface::class) === null) {
+			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', EventDispatcherInterface::class));
 		}
 
-		$dispatcher = $builder->getDefinition($builder->getByType(EventDispatcher::class));
+		$dispatcher = $builder->getDefinition($builder->getByType(EventDispatcherInterface::class));
 
 		$application = $builder->getDefinition($builder->getByType(Application::class));
 

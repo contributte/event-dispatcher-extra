@@ -9,7 +9,7 @@ use LogicException;
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\PhpLiteral;
 use Nette\Security\User;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EventSecurityBridgeExtension extends CompilerExtension
 {
@@ -25,12 +25,12 @@ class EventSecurityBridgeExtension extends CompilerExtension
 			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', User::class));
 		}
 
-		if ($builder->getByType(EventDispatcher::class) === null) {
-			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', EventDispatcher::class));
+		if ($builder->getByType(EventDispatcherInterface::class) === null) {
+			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', EventDispatcherInterface::class));
 		}
 
 		$user = $builder->getDefinition($builder->getByType(User::class));
-		$dispatcher = $builder->getDefinition($builder->getByType(EventDispatcher::class));
+		$dispatcher = $builder->getDefinition($builder->getByType(EventDispatcherInterface::class));
 
 		$user->addSetup('?->onLoggedIn[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 			'@self',
