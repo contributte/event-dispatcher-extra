@@ -11,7 +11,7 @@ use Nette\Bridges\ApplicationLatte\ILatteFactory;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\PhpLiteral;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EventLatteBridgeExtension extends CompilerExtension
 {
@@ -24,11 +24,11 @@ class EventLatteBridgeExtension extends CompilerExtension
 			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', ILatteFactory::class));
 		}
 
-		if ($builder->getByType(EventDispatcher::class) === null) {
-			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', EventDispatcher::class));
+		if ($builder->getByType(EventDispatcherInterface::class) === null) {
+			throw new LogicException(sprintf('Service of type "%s" is needed. Please register it.', EventDispatcherInterface::class));
 		}
 
-		$dispatcher = $builder->getDefinition($builder->getByType(EventDispatcher::class));
+		$dispatcher = $builder->getDefinition($builder->getByType(EventDispatcherInterface::class));
 
 		$latteEngine = $builder->getDefinition($builder->getByType(ILatteFactory::class));
 		$latteEngine->addSetup('?->onCompile[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
