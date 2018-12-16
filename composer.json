@@ -35,7 +35,7 @@
     "nette/application": "~2.4.12",
     "nette/security": "~2.4.3",
     "nette/http": "~2.4.9",
-    "contributte/event-dispatcher": "^0.3.1"
+    "contributte/event-dispatcher": "^0.5.0"
   },
   "conflict": {
     "latte/latte": "<2.4.7",
