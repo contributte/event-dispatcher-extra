@@ -30,7 +30,8 @@ class EventLatteBridgeExtension extends CompilerExtension
 
 		$dispatcher = $builder->getDefinition($builder->getByType(EventDispatcherInterface::class));
 
-		$latteEngine = $builder->getDefinition($builder->getByType(ILatteFactory::class));
+		$latteEngine = $builder->getDefinition($builder->getByType(ILatteFactory::class))
+			->getResultDefinition();
 		$latteEngine->addSetup('?->onCompile[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
@@ -41,7 +42,8 @@ class EventLatteBridgeExtension extends CompilerExtension
 		$templateFactoryName = $builder->getByType(ITemplateFactory::class);
 		if ($templateFactoryName !== null) {
 			$templateFactory = $builder->getDefinition($templateFactoryName);
-			if ($templateFactory->factory !== null && $templateFactory->factory->entity !== TemplateFactory::class) {
+			$reflection = new \ReflectionClass($templateFactory->factory->entity);
+			if ($templateFactory->factory !== null && !$templateFactory->factory->entity instanceof TemplateFactory && $reflection->getParentClass() == $templateFactory->factory->entity) {
 				throw new LogicException(sprintf('Service "%s" must be instance of "%s" to support TemplateCreateEvent.', $templateFactoryName, TemplateFactory::class));
 			}
 
