@@ -1,12 +1,16 @@
-# Event Dispatcher Extra :recycle:
+# Contributte Event Dispatcher Extra
 
-## Content :gift:
+## Content
 
-- [Usage - how to register](#usage-tada)
-- [Bridge - events list](#bridge-wrench)
-- [Command - example command](#subscriber-bulb)
+- [Setup](#setup)
+- [Events list](#events-list)
+- [Implementing subscriber](#subscriber)
 
-## Usage :tada:
+## Setup
+
+```bash
+composer require contributte/event-dispatcher-extra
+```
 
 ```yaml
 extensions:
@@ -32,7 +36,7 @@ extensions:
     events.latte: Contributte\Events\Extra\DI\EventLatteBridgeExtension
 ```
 
-## Bridge :wrench:
+## Events list
 
 There are several events on which you can listen to.
 
@@ -80,7 +84,7 @@ use Contributte\Events\Extra\Event\Security\LoggedOutEvent;
 - `LoggedInEvent::NAME` && `SecurityEvents::ON_LOGGED_IN`
 - `LoggedOutEvent::NAME` && `SecurityEvents::ON_LOGGED_OUT`
 
-## Subscriber :bulb:
+## Subscriber
 
 ```php
 use Contributte\EventDispatcher\EventSubscriber;

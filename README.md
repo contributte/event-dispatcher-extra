@@ -1,11 +1,9 @@
-# Event Dispatcher Extra :recycle:
+# Contributte Event Dispatcher Extra
 
 Bridges between [`Contributte\EventDispatcher`](https://github.com/contributte/event-dispatcher) and the Nette packages.
 
 - [`Nette\Application`](https://github.com/nette/application/)
 - [`Nette\Security`](https://github.com/nette/security/)
-
------
 
 [![Build Status](https://img.shields.io/travis/contributte/event-dispatcher-extra.svg?style=flat-square)](https://travis-ci.org/contributte/event-dispatcher-extra)
 [![Code coverage](https://img.shields.io/coveralls/contributte/event-dispatcher-extra.svg?style=flat-square)](https://coveralls.io/r/contributte/event-dispatcher-extra)
@@ -13,17 +11,17 @@ Bridges between [`Contributte\EventDispatcher`](https://github.com/contributte/e
 [![Downloads this Month](https://img.shields.io/packagist/dm/contributte/event-dispatcher-extra.svg?style=flat-square)](https://packagist.org/packages/contributte/event-dispatcher-extra)
 [![Downloads total](https://img.shields.io/packagist/dt/contributte/event-dispatcher-extra.svg?style=flat-square)](https://packagist.org/packages/contributte/event-dispatcher-extra)
 [![Latest stable](https://img.shields.io/packagist/v/contributte/event-dispatcher-extra.svg?style=flat-square)](https://packagist.org/packages/contributte/event-dispatcher-extra)
-[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
 
 ## Discussion / Help
 
 [![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
 
-## Install
+## Documentation
 
-```
-composer require contributte/event-dispatcher-extra
-```
+- [Setup](.docs/README.md#setup)
+- [Events list](.docs/README.md#events-list)
+- [Implementing subscriber](.docs/README.md#subscriber)
 
 ## Versions
 
@@ -32,12 +30,6 @@ composer require contributte/event-dispatcher-extra
 | dev         | `^0.5`  | `master` | `>= 7.1` |
 | stable      | `^0.4`  | `master` | `>= 7.1` |
 | stable      | `^0.1`  | `master` | `>= 5.6` |
-
-## Overview
-
-- [Usage - how to register](https://github.com/contributte/event-dispatcher-extra/blob/master/.docs/README.md#usage-tada)
-- [Bridge - events list](https://github.com/contributte/event-dispatcher-extra/blob/master/.docs/README.md#bridge-wrench)
-- [Command - example command](https://github.com/contributte/event-dispatcher-extra/blob/master/.docs/README.md#subscriber-bulb)
 
 ## Maintainers
 
@@ -61,7 +53,5 @@ composer require contributte/event-dispatcher-extra
     </tr>
   </tbody>
 </table>
-
------
 
 Thank you for testing, reporting and contributing.
