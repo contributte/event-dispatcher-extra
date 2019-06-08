@@ -4,17 +4,23 @@ namespace Contributte\Events\Extra\DI;
 
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\ClassType;
-use Nette\Utils\Validators;
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
 
+/**
+ * @property-read mixed[] $config
+ */
 class EventBridgesExtension extends CompilerExtension
 {
 
-	/** @var mixed[] */
-	private $defaults = [
-		'application' => [],
-		'latte' => [],
-		'security' => [],
-	];
+	public function getConfigSchema(): Schema
+	{
+		return Expect::structure([
+			'application' => Expect::anyOf(false)->default([]),
+			'latte' => Expect::anyOf(false)->default([]),
+			'security' => Expect::anyOf(false)->default([]),
+		])->castTo('array');
+	}
 
 	/** @var string[] */
 	private $map = [
@@ -31,20 +37,17 @@ class EventBridgesExtension extends CompilerExtension
 	 */
 	public function loadConfiguration(): void
 	{
-		$config = $this->validateConfig($this->defaults, $this->config);
-		foreach ($config as $bridge => $enabled) {
+		$config = $this->config;
+		foreach ($config as $bridge => $bridgeConfig) {
 			// Don't register sub extension
-			if ($enabled === false) {
+			if ($bridgeConfig === false) {
 				continue;
 			}
-
-			// Security check
-			Validators::assertField($config, $bridge, 'array');
 
 			// Register sub extension a.k.a CompilerPass
 			$this->passes[$bridge] = new $this->map[$bridge]();
 			$this->passes[$bridge]->setCompiler($this->compiler, $this->prefix($bridge));
-			$this->passes[$bridge]->setConfig($this->config[$bridge] ?? []);
+			$this->passes[$bridge]->setConfig($bridgeConfig);
 			$this->passes[$bridge]->loadConfiguration();
 		}
 	}

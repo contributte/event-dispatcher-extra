@@ -9,7 +9,7 @@ use Throwable;
 class ShutdownEvent extends Event
 {
 
-	public const NAME = ApplicationEvents::ON_SHUTDOWN;
+	public const NAME = self::class;
 
 	/** @var Application */
 	private $application;

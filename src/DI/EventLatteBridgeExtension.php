@@ -3,13 +3,14 @@
 namespace Contributte\Events\Extra\DI;
 
 use Contributte\Events\Extra\Event\Latte\LatteCompileEvent;
-use Contributte\Events\Extra\Event\Latte\LatteEvents;
 use Contributte\Events\Extra\Event\Latte\TemplateCreateEvent;
 use LogicException;
 use Nette\Application\UI\ITemplateFactory;
 use Nette\Bridges\ApplicationLatte\ILatteFactory;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\DI\CompilerExtension;
+use Nette\DI\Definitions\FactoryDefinition;
+use Nette\DI\ServiceDefinition;
 use Nette\PhpGenerator\PhpLiteral;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -31,16 +32,21 @@ class EventLatteBridgeExtension extends CompilerExtension
 		$dispatcher = $builder->getDefinition($builder->getByType(EventDispatcherInterface::class));
 
 		$latteEngine = $builder->getDefinition($builder->getByType(ILatteFactory::class));
-		$latteEngine->addSetup('?->onCompile[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
-			'@self',
-			$dispatcher,
-			LatteEvents::ON_LATTE_COMPILE,
-			new PhpLiteral(LatteCompileEvent::class),
-		]);
+		assert($latteEngine instanceof FactoryDefinition);
+
+		$latteEngine
+			->getResultDefinition()
+			->addSetup('?->onCompile[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
+				'@self',
+				$dispatcher,
+				LatteCompileEvent::NAME,
+				new PhpLiteral(LatteCompileEvent::class),
+			]);
 
 		$templateFactoryName = $builder->getByType(ITemplateFactory::class);
 		if ($templateFactoryName !== null) {
 			$templateFactory = $builder->getDefinition($templateFactoryName);
+			assert($templateFactory instanceof ServiceDefinition);
 			if ($templateFactory->factory !== null && $templateFactory->factory->entity !== TemplateFactory::class) {
 				throw new LogicException(sprintf('Service "%s" must be instance of "%s" to support TemplateCreateEvent.', $templateFactoryName, TemplateFactory::class));
 			}
@@ -48,7 +54,7 @@ class EventLatteBridgeExtension extends CompilerExtension
 			$templateFactory->addSetup('?->onCreate[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 				'@self',
 				$dispatcher,
-				LatteEvents::ON_TEMPLATE_CREATE,
+				TemplateCreateEvent::NAME,
 				new PhpLiteral(TemplateCreateEvent::class),
 			]);
 		}

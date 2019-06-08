@@ -8,11 +8,11 @@ interface SecurityEvents
 	/**
 	 * Occurs when the user is successfully logged in
 	 */
-	public const ON_LOGGED_IN = 'nette.security.loggedin';
+	public const ON_LOGGED_IN = LoggedInEvent::NAME;
 
 	/**
 	 * Occurs when the user is logged out
 	 */
-	public const ON_LOGGED_OUT = 'nette.security.loggedout';
+	public const ON_LOGGED_OUT = LoggedOutEvent::NAME;
 
 }

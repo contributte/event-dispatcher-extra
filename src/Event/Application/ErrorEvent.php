@@ -9,7 +9,7 @@ use Throwable;
 class ErrorEvent extends Event
 {
 
-	public const NAME = ApplicationEvents::ON_ERROR;
+	public const NAME = self::class;
 
 	/** @var Application */
 	private $application;
