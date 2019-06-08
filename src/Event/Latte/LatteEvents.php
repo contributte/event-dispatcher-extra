@@ -8,11 +8,11 @@ interface LatteEvents
 	/**
 	 * Occurs before latte file is compiled
 	 */
-	public const ON_LATTE_COMPILE = 'nette.latte.compile';
+	public const ON_LATTE_COMPILE = LatteCompileEvent::NAME;
 
 	/**
 	 * Occurs before template is created
 	 */
-	public const ON_TEMPLATE_CREATE = 'nette.application.templateCreate';
+	public const ON_TEMPLATE_CREATE = TemplateCreateEvent::NAME;
 
 }

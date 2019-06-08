@@ -7,6 +7,7 @@ use Contributte\Events\Extra\Event\Security\LoggedOutEvent;
 use Contributte\Events\Extra\Event\Security\SecurityEvents;
 use LogicException;
 use Nette\DI\CompilerExtension;
+use Nette\DI\ServiceDefinition;
 use Nette\PhpGenerator\PhpLiteral;
 use Nette\Security\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -32,6 +33,7 @@ class EventSecurityBridgeExtension extends CompilerExtension
 		$user = $builder->getDefinition($builder->getByType(User::class));
 		$dispatcher = $builder->getDefinition($builder->getByType(EventDispatcherInterface::class));
 
+		assert($user instanceof ServiceDefinition);
 		$user->addSetup('?->onLoggedIn[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,

@@ -8,7 +8,7 @@ use Symfony\Component\EventDispatcher\Event;
 class LoggedOutEvent extends Event
 {
 
-	public const NAME = SecurityEvents::ON_LOGGED_OUT;
+	public const NAME = self::class;
 
 	/** @var User */
 	private $user;

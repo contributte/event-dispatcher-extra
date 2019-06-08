@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\Event;
 class RequestEvent extends Event
 {
 
-	public const NAME = ApplicationEvents::ON_REQUEST;
+	public const NAME = self::class;
 
 	/** @var Application */
 	private $application;

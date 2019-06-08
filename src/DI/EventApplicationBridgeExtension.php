@@ -2,7 +2,6 @@
 
 namespace Contributte\Events\Extra\DI;
 
-use Contributte\Events\Extra\Event\Application\ApplicationEvents;
 use Contributte\Events\Extra\Event\Application\ErrorEvent;
 use Contributte\Events\Extra\Event\Application\PresenterEvent;
 use Contributte\Events\Extra\Event\Application\PresenterShutdownEvent;
@@ -14,6 +13,7 @@ use Contributte\Events\Extra\Event\Application\StartupEvent;
 use LogicException;
 use Nette\Application\Application;
 use Nette\DI\CompilerExtension;
+use Nette\DI\ServiceDefinition;
 use Nette\PhpGenerator\PhpLiteral;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -38,60 +38,61 @@ class EventApplicationBridgeExtension extends CompilerExtension
 		$dispatcher = $builder->getDefinition($builder->getByType(EventDispatcherInterface::class));
 
 		$application = $builder->getDefinition($builder->getByType(Application::class));
+		assert($application instanceof ServiceDefinition);
 
 		$application->addSetup('?->onStartup[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			ApplicationEvents::ON_STARTUP,
+			StartupEvent::NAME,
 			new PhpLiteral(StartupEvent::class),
 		]);
 
 		$application->addSetup('?->onError[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			ApplicationEvents::ON_ERROR,
+			ErrorEvent::NAME,
 			new PhpLiteral(ErrorEvent::class),
 		]);
 
 		$application->addSetup('?->onPresenter[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			ApplicationEvents::ON_PRESENTER,
+			PresenterEvent::NAME,
 			new PhpLiteral(PresenterEvent::class),
 		]);
 
 		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!property_exists($presenter, "onStartup")){return;} $presenter->onStartup[] = function() {?->dispatch(?, new ?(...func_get_args()));};}', [
 			'@self',
 			$dispatcher,
-			ApplicationEvents::ON_PRESENTER_STARTUP,
+			PresenterStartupEvent::NAME,
 			new PhpLiteral(PresenterStartupEvent::class),
 		]);
 
 		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!property_exists($presenter, "onShutdown")){return;} $presenter->onShutdown[] = function() {?->dispatch(?, new ?(...func_get_args()));};}', [
 			'@self',
 			$dispatcher,
-			ApplicationEvents::ON_PRESENTER_SHUTDOWN,
+			PresenterShutdownEvent::NAME,
 			new PhpLiteral(PresenterShutdownEvent::class),
 		]);
 
 		$application->addSetup('?->onRequest[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			ApplicationEvents::ON_REQUEST,
+			RequestEvent::NAME,
 			new PhpLiteral(RequestEvent::class),
 		]);
 
 		$application->addSetup('?->onResponse[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			ApplicationEvents::ON_RESPONSE,
+			ResponseEvent::NAME,
 			new PhpLiteral(ResponseEvent::class),
 		]);
 
 		$application->addSetup('?->onShutdown[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			ApplicationEvents::ON_SHUTDOWN,
+			ShutdownEvent::NAME,
 			new PhpLiteral(ShutdownEvent::class),
 		]);
 	}

@@ -3,12 +3,12 @@
 namespace Contributte\Events\Extra\Event\Latte;
 
 use Nette\Bridges\ApplicationLatte\Template;
-use Symfony\Component\EventDispatcher\Event;
 
-class TemplateCreateEvent extends Event
+
+class TemplateCreateEvent extends \Symfony\Component\EventDispatcher\Event
 {
 
-	public const NAME = LatteEvents::ON_TEMPLATE_CREATE;
+	public const NAME = self::class;
 
 	/** @var Template */
 	private $template;
