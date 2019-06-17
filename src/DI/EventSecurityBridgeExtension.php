@@ -4,7 +4,6 @@ namespace Contributte\Events\Extra\DI;
 
 use Contributte\Events\Extra\Event\Security\LoggedInEvent;
 use Contributte\Events\Extra\Event\Security\LoggedOutEvent;
-use Contributte\Events\Extra\Event\Security\SecurityEvents;
 use LogicException;
 use Nette\DI\CompilerExtension;
 use Nette\DI\ServiceDefinition;
@@ -34,16 +33,14 @@ class EventSecurityBridgeExtension extends CompilerExtension
 		$dispatcher = $builder->getDefinition($builder->getByType(EventDispatcherInterface::class));
 
 		assert($user instanceof ServiceDefinition);
-		$user->addSetup('?->onLoggedIn[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
+		$user->addSetup('?->onLoggedIn[] = function() {?->dispatch(new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			SecurityEvents::ON_LOGGED_IN,
 			new PhpLiteral(LoggedInEvent::class),
 		]);
-		$user->addSetup('?->onLoggedOut[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
+		$user->addSetup('?->onLoggedOut[] = function() {?->dispatch(new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			SecurityEvents::ON_LOGGED_OUT,
 			new PhpLiteral(LoggedOutEvent::class),
 		]);
 	}

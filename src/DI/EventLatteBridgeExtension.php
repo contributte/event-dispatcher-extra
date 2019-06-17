@@ -36,10 +36,9 @@ class EventLatteBridgeExtension extends CompilerExtension
 
 		$latteEngine
 			->getResultDefinition()
-			->addSetup('?->onCompile[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
+			->addSetup('?->onCompile[] = function() {?->dispatch(new ?(...func_get_args()));}', [
 				'@self',
 				$dispatcher,
-				LatteCompileEvent::NAME,
 				new PhpLiteral(LatteCompileEvent::class),
 			]);
 
@@ -50,10 +49,9 @@ class EventLatteBridgeExtension extends CompilerExtension
 				continue;
 			}
 
-			$templateFactory->addSetup('?->onCreate[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
+			$templateFactory->addSetup('?->onCreate[] = function() {?->dispatch(new ?(...func_get_args()));}', [
 				'@self',
 				$dispatcher,
-				TemplateCreateEvent::NAME,
 				new PhpLiteral(TemplateCreateEvent::class),
 			]);
 		}
