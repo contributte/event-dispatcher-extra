@@ -2,11 +2,10 @@
 
 namespace Tests\Fixtures;
 
-use Contributte\EventDispatcher\EventSubscriber;
 use Contributte\Events\Extra\Event\Latte\LatteCompileEvent;
-use Contributte\Events\Extra\Event\Latte\LatteEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class FakeLatteCompileSubscriber implements EventSubscriber
+final class FakeLatteCompileSubscriber implements EventSubscriberInterface
 {
 
 	/** @var LatteCompileEvent[] */
@@ -17,7 +16,7 @@ final class FakeLatteCompileSubscriber implements EventSubscriber
 	 */
 	public static function getSubscribedEvents(): array
 	{
-		return [LatteEvents::ON_LATTE_COMPILE => 'onLatteCompile'];
+		return [LatteCompileEvent::class => 'onLatteCompile'];
 	}
 
 	public function onLatteCompile(LatteCompileEvent $event): void

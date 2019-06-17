@@ -23,7 +23,8 @@
   ],
   "require": {
     "php": "^7.2",
-    "nette/di": "~3.0.0"
+    "nette/di": "~3.0.0",
+    "symfony/event-dispatcher": "^4.3.1"
   },
   "require-dev": {
     "contributte/event-dispatcher": "^0.6.0",

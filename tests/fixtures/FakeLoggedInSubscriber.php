@@ -2,11 +2,10 @@
 
 namespace Tests\Fixtures;
 
-use Contributte\EventDispatcher\EventSubscriber;
 use Contributte\Events\Extra\Event\Security\LoggedInEvent;
-use Contributte\Events\Extra\Event\Security\SecurityEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class FakeLoggedInSubscriber implements EventSubscriber
+final class FakeLoggedInSubscriber implements EventSubscriberInterface
 {
 
 	/** @var LoggedInEvent[] */
@@ -17,7 +16,7 @@ final class FakeLoggedInSubscriber implements EventSubscriber
 	 */
 	public static function getSubscribedEvents(): array
 	{
-		return [SecurityEvents::ON_LOGGED_IN => 'onLoggedIn'];
+		return [LoggedInEvent::class => 'onLoggedIn'];
 	}
 
 	public function onLoggedIn(LoggedInEvent $event): void

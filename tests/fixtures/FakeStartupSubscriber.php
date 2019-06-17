@@ -2,10 +2,10 @@
 
 namespace Tests\Fixtures;
 
-use Contributte\EventDispatcher\EventSubscriber;
 use Contributte\Events\Extra\Event\Application\StartupEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class FakeStartupSubscriber implements EventSubscriber
+final class FakeStartupSubscriber implements EventSubscriberInterface
 {
 
 	/** @var StartupEvent[] */
@@ -16,7 +16,7 @@ final class FakeStartupSubscriber implements EventSubscriber
 	 */
 	public static function getSubscribedEvents(): array
 	{
-		return [StartupEvent::NAME => 'onStartup'];
+		return [StartupEvent::class => 'onStartup'];
 	}
 
 	public function onStartup(StartupEvent $event): void

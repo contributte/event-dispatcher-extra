@@ -87,20 +87,21 @@ use Contributte\Events\Extra\Event\Security\LoggedOutEvent;
 ## Subscriber
 
 ```php
-use Contributte\EventDispatcher\EventSubscriber;
 use Contributte\Events\Extra\Event\Application\RequestEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class LogRequestSubscriber implements EventSubscriber
+final class LogRequestSubscriber implements EventSubscriberInterface
 {
 
     public static function getSubscribedEvents(): array
     {
-        return [RequestEvent::NAME => 'onLog'];
+        return [RequestEvent::class => 'onLog'];
     }
 
     public function onLog(RequestEvent $event): void
     {
         // Do magic..
     }
+    
 }
 ```

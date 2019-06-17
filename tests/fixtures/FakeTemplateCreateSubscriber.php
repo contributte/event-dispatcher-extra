@@ -2,11 +2,10 @@
 
 namespace Tests\Fixtures;
 
-use Contributte\EventDispatcher\EventSubscriber;
-use Contributte\Events\Extra\Event\Latte\LatteEvents;
 use Contributte\Events\Extra\Event\Latte\TemplateCreateEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class FakeTemplateCreateSubscriber implements EventSubscriber
+final class FakeTemplateCreateSubscriber implements EventSubscriberInterface
 {
 
 	/** @var TemplateCreateEvent[] */
@@ -17,7 +16,7 @@ final class FakeTemplateCreateSubscriber implements EventSubscriber
 	 */
 	public static function getSubscribedEvents(): array
 	{
-		return [LatteEvents::ON_TEMPLATE_CREATE => 'onTemplateCreate'];
+		return [TemplateCreateEvent::class => 'onTemplateCreate'];
 	}
 
 	public function onTemplateCreate(TemplateCreateEvent $event): void

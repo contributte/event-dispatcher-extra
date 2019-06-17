@@ -2,11 +2,10 @@
 
 namespace Tests\Fixtures;
 
-use Contributte\EventDispatcher\EventSubscriber;
-use Contributte\Events\Extra\Event\Application\ApplicationEvents;
 use Contributte\Events\Extra\Event\Application\PresenterShutdownEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class FakePresenterShutdownSubscriber implements EventSubscriber
+class FakePresenterShutdownSubscriber implements EventSubscriberInterface
 {
 
 	/** @var PresenterShutdownEvent[] */
@@ -17,7 +16,7 @@ class FakePresenterShutdownSubscriber implements EventSubscriber
 	 */
 	public static function getSubscribedEvents(): array
 	{
-		return [ApplicationEvents::ON_PRESENTER_SHUTDOWN => 'onPresenterShutdown'];
+		return [PresenterShutdownEvent::class => 'onPresenterShutdown'];
 	}
 
 	public function onPresenterShutdown(PresenterShutdownEvent $event): void
