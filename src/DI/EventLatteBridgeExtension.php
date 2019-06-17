@@ -43,12 +43,11 @@ class EventLatteBridgeExtension extends CompilerExtension
 				new PhpLiteral(LatteCompileEvent::class),
 			]);
 
-		$templateFactoryName = $builder->getByType(ITemplateFactory::class);
-		if ($templateFactoryName !== null) {
-			$templateFactory = $builder->getDefinition($templateFactoryName);
+		$templateFactories = $builder->findByType(ITemplateFactory::class);
+		foreach ($templateFactories as $templateFactory) {
 			assert($templateFactory instanceof ServiceDefinition);
-			if ($templateFactory->factory !== null && $templateFactory->factory->entity !== TemplateFactory::class) {
-				throw new LogicException(sprintf('Service "%s" must be instance of "%s" to support TemplateCreateEvent.', $templateFactoryName, TemplateFactory::class));
+			if ($templateFactory->factory === null || $templateFactory->factory->entity !== TemplateFactory::class) {
+				continue;
 			}
 
 			$templateFactory->addSetup('?->onCreate[] = function() {?->dispatch(?, new ?(...func_get_args()));}', [
