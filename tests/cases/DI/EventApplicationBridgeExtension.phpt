@@ -7,6 +7,7 @@
 use Contributte\EventDispatcher\DI\EventDispatcherExtension;
 use Contributte\Events\Extra\DI\EventApplicationBridgeExtension;
 use Nette\Application\Application;
+use Nette\Application\Responses\VoidResponse;
 use Nette\Bridges\ApplicationDI\ApplicationExtension;
 use Nette\Bridges\HttpDI\HttpExtension;
 use Nette\DI\Compiler;
@@ -67,7 +68,8 @@ test(function (): void {
 	$presenter = new FakePresenter();
 	$application->onPresenter($application, $presenter);
 	$presenter->onStartup($presenter);
-	$presenter->onShutdown($presenter, null);
+	$response = new VoidResponse();
+	$presenter->onShutdown($presenter, $response);
 
 	/** @var FakePresenterStartupSubscriber $presenterStartupSubscriber */
 	$presenterStartupSubscriber = $container->getByType(FakePresenterStartupSubscriber::class);
@@ -78,5 +80,5 @@ test(function (): void {
 	$presenterShutdownSubscriber = $container->getByType(FakePresenterShutdownSubscriber::class);
 	Assert::count(1, $presenterShutdownSubscriber->onCall);
 	Assert::same($presenter, $presenterShutdownSubscriber->onCall[0]->getPresenter());
-	Assert::null($presenterShutdownSubscriber->onCall[0]->getResponse());
+	Assert::same($response, $presenterShutdownSubscriber->onCall[0]->getResponse());
 });
