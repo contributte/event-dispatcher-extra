@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 class StartupEvent extends Event
 {
 
-	public const NAME = self::class;
-
 	/** @var Application */
 	private $application;
 
