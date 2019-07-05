@@ -12,6 +12,7 @@ use Contributte\Events\Extra\Event\Application\ShutdownEvent;
 use Contributte\Events\Extra\Event\Application\StartupEvent;
 use LogicException;
 use Nette\Application\Application;
+use Nette\Application\UI\Presenter;
 use Nette\DI\CompilerExtension;
 use Nette\DI\ServiceDefinition;
 use Nette\PhpGenerator\PhpLiteral;
@@ -58,14 +59,16 @@ class EventApplicationBridgeExtension extends CompilerExtension
 			new PhpLiteral(PresenterEvent::class),
 		]);
 
-		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!property_exists($presenter, "onStartup")){return;} $presenter->onStartup[] = function() {?->dispatch(new ?(...func_get_args()));};}', [
+		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!$presenter instanceof ?){return;} $presenter->onStartup[] = function() {?->dispatch(new ?(...func_get_args()));};}', [
 			'@self',
+			new PhpLiteral(Presenter::class),
 			$dispatcher,
 			new PhpLiteral(PresenterStartupEvent::class),
 		]);
 
-		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!property_exists($presenter, "onShutdown")){return;} $presenter->onShutdown[] = function() {?->dispatch(new ?(...func_get_args()));};}', [
+		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!$presenter instanceof ?){return;} $presenter->onShutdown[] = function() {?->dispatch(new ?(...func_get_args()));};}', [
 			'@self',
+			new PhpLiteral(Presenter::class),
 			$dispatcher,
 			new PhpLiteral(PresenterShutdownEvent::class),
 		]);
