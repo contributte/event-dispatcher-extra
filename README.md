@@ -3,6 +3,7 @@
 Bridges between [`Contributte\EventDispatcher`](https://github.com/contributte/event-dispatcher) and the Nette packages.
 
 - [`Nette\Application`](https://github.com/nette/application/)
+- [`Nette\Latte`](https://github.com/nette/latte)
 - [`Nette\Security`](https://github.com/nette/security/)
 
 [![Build Status](https://img.shields.io/travis/contributte/event-dispatcher-extra.svg?style=flat-square)](https://travis-ci.org/contributte/event-dispatcher-extra)
