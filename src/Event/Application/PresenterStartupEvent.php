@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 class PresenterStartupEvent extends Event
 {
 
-	public const NAME = self::class;
-
 	/** @var IPresenter */
 	private $presenter;
 

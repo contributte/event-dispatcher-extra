@@ -9,8 +9,6 @@ use Symfony\Component\EventDispatcher\Event;
 class PresenterEvent extends Event
 {
 
-	public const NAME = self::class;
-
 	/** @var Application */
 	private $application;
 

@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 class LatteCompileEvent extends Event
 {
 
-	public const NAME = self::class;
-
 	/** @var Engine */
 	private $engine;
 

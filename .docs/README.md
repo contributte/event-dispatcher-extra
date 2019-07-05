@@ -43,7 +43,6 @@ There are several events on which you can listen to.
 **Nette Application events:**
 
 ```php
-use Contributte\Events\Extra\Event\Application\ApplicationEvents;
 use Contributte\Events\Extra\Event\Application\ErrorEvent;
 use Contributte\Events\Extra\Event\Application\PresenterEvent;
 use Contributte\Events\Extra\Event\Application\PresenterStartupEvent;
@@ -54,25 +53,12 @@ use Contributte\Events\Extra\Event\Application\ShutdownEvent;
 use Contributte\Events\Extra\Event\Application\StartupEvent;
 ```
 
-- `StartupEvent::NAME` && `ApplicationEvents::ON_STARTUP`
-- `ShutdownEvent::NAME` && `ApplicationEvents::ON_SHUTDOWN`
-- `RequestEvent::NAME` && `ApplicationEvents::ON_REQUEST`
-- `PresenterEvent::NAME` && `ApplicationEvents::ON_PRESENTER`
-- `PresenterStartupEvent::NAME` && `ApplicationEvents::ON_PRESENTER_STARTUP`
-- `PresenterShutdownEvent::NAME` && `ApplicationEvents::ON_PRESENTER_SHUTDOWN`
-- `ResponseEvent::NAME` && `ApplicationEvents::ON_RESPONSE`
-- `ErrorEvent::NAME` && `ApplicationEvents::ON_ERROR`
-
 **Nette Latte events:**
 
 ```php
-use Contributte\Events\Extra\Event\Latte\LatteEvents;
 use Contributte\Events\Extra\Event\Latte\LatteCompileEvent;
 use Contributte\Events\Extra\Event\Latte\TemplateCreateEvent;
 ```
-
-- `LatteCompileEvent::NAME` && `LatteEvents::ON_LATTE_COMPILE`
-- `TemplateCreateEvent::NAME` && `LatteEvents::ON_TEMPLATE_CREATE`
 
 **Nette Security events:**
 
@@ -80,9 +66,6 @@ use Contributte\Events\Extra\Event\Latte\TemplateCreateEvent;
 use Contributte\Events\Extra\Event\Security\LoggedInEvent;
 use Contributte\Events\Extra\Event\Security\LoggedOutEvent;
 ```
-
-- `LoggedInEvent::NAME` && `SecurityEvents::ON_LOGGED_IN`
-- `LoggedOutEvent::NAME` && `SecurityEvents::ON_LOGGED_OUT`
 
 ## Subscriber
 

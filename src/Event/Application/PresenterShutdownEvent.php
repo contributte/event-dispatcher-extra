@@ -9,8 +9,6 @@ use Symfony\Component\EventDispatcher\Event;
 class PresenterShutdownEvent extends Event
 {
 
-	public const NAME = self::class;
-
 	/** @var IPresenter */
 	private $presenter;
 
