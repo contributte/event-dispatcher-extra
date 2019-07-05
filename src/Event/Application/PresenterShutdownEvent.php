@@ -12,10 +12,10 @@ class PresenterShutdownEvent extends Event
 	/** @var Presenter */
 	private $presenter;
 
-	/** @var IResponse|null */
+	/** @var IResponse */
 	private $response;
 
-	public function __construct(Presenter $presenter, ?IResponse $response = null)
+	public function __construct(Presenter $presenter, IResponse $response)
 	{
 		$this->presenter = $presenter;
 		$this->response = $response;
@@ -26,7 +26,7 @@ class PresenterShutdownEvent extends Event
 		return $this->presenter;
 	}
 
-	public function getResponse(): ?IResponse
+	public function getResponse(): IResponse
 	{
 		return $this->response;
 	}
