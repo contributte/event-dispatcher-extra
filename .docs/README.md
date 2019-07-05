@@ -8,14 +8,18 @@
 
 ## Setup
 
+First of all, setup an event dispatcher integration (e.g. [contributte/event-dispatcher](https://github.com/contributte/event-dispatcher/))
+
+Install package
+
 ```bash
 composer require contributte/event-dispatcher-extra
 ```
 
+Register extension
+
 ```yaml
 extensions:
-    events: Contributte\EventDispatcher\DI\EventDispatcherExtension
-
     # register all event bridges
     events.extra: Contributte\Events\Extra\DI\EventBridgesExtension
 
@@ -42,25 +46,41 @@ There are several events on which you can listen to.
 
 **Nette Application events:**
 
+Connected to `Nette\Application\Application` events
+
 ```php
-use Contributte\Events\Extra\Event\Application\ErrorEvent;
-use Contributte\Events\Extra\Event\Application\PresenterEvent;
-use Contributte\Events\Extra\Event\Application\PresenterStartupEvent;
-use Contributte\Events\Extra\Event\Application\PresenterShutdownEvent;
+use Contributte\Events\Extra\Event\Application\StartupEvent;
 use Contributte\Events\Extra\Event\Application\RequestEvent;
+use Contributte\Events\Extra\Event\Application\PresenterEvent;
 use Contributte\Events\Extra\Event\Application\ResponseEvent;
 use Contributte\Events\Extra\Event\Application\ShutdownEvent;
-use Contributte\Events\Extra\Event\Application\StartupEvent;
+use Contributte\Events\Extra\Event\Application\ErrorEvent;
 ```
 
-**Nette Latte events:**
+Connected to `Nette\Application\UI\Presenter` events (`Nette\Application\IPresenter` is not supported)
+
+```php
+use Contributte\Events\Extra\Event\Application\PresenterStartupEvent;
+use Contributte\Events\Extra\Event\Application\PresenterShutdownEvent;
+```
+
+**Latte events:**
+
+Connected to `Latte\Engine::$onCompile` event 
 
 ```php
 use Contributte\Events\Extra\Event\Latte\LatteCompileEvent;
+```
+
+Connected to `Nette\Bridges\ApplicationLatte\TemplateFactory::$onCreate` event
+
+```php
 use Contributte\Events\Extra\Event\Latte\TemplateCreateEvent;
 ```
 
 **Nette Security events:**
+
+Connected to `Nette\Security\User` `$onLoggedIn` and `$onLoggedOut` events
 
 ```php
 use Contributte\Events\Extra\Event\Security\LoggedInEvent;
