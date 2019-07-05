@@ -5,21 +5,10 @@ namespace Tests\Fixtures;
 use Nette\Application\IPresenter;
 use Nette\Application\IResponse;
 use Nette\Application\Request;
+use Nette\Application\UI\Presenter;
 use Nette\SmartObject;
 
-class FakePresenter implements IPresenter
+class FakePresenter extends Presenter
 {
-
-	use SmartObject;
-
-	/** @var callable[]  function (Presenter $sender); Occurs when the presenter is starting */
-	public $onStartup;
-
-	/** @var callable[]  function (Presenter $sender, IResponse $response = null); Occurs when the presenter is shutting down */
-	public $onShutdown;
-
-	public function run(Request $request): IResponse
-	{
-	}
 
 }
