@@ -16,9 +16,9 @@ class EventBridgesExtension extends CompilerExtension
 	public function getConfigSchema(): Schema
 	{
 		return Expect::structure([
-			'application' => Expect::anyOf(false)->default([]),
-			'latte' => Expect::anyOf(false)->default([]),
-			'security' => Expect::anyOf(false)->default([]),
+			'application' => Expect::anyOf(false),
+			'latte' => Expect::anyOf(false),
+			'security' => Expect::anyOf(false),
 		])->castTo('array');
 	}
 
@@ -48,6 +48,11 @@ class EventBridgesExtension extends CompilerExtension
 			$this->passes[$bridge] = new $this->map[$bridge]();
 			$this->passes[$bridge]->setCompiler($this->compiler, $this->prefix($bridge));
 			$this->passes[$bridge]->setConfig($bridgeConfig);
+
+			if ($bridgeConfig !== null) {
+				$this->passes[$bridge]->setConfig($bridgeConfig);
+			}
+
 			$this->passes[$bridge]->loadConfiguration();
 		}
 	}
