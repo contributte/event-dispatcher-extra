@@ -47,7 +47,6 @@ class EventBridgesExtension extends CompilerExtension
 			// Register sub extension a.k.a CompilerPass
 			$this->passes[$bridge] = new $this->map[$bridge]();
 			$this->passes[$bridge]->setCompiler($this->compiler, $this->prefix($bridge));
-			$this->passes[$bridge]->setConfig($bridgeConfig);
 
 			if ($bridgeConfig !== null) {
 				$this->passes[$bridge]->setConfig($bridgeConfig);
