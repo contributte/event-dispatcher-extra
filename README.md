@@ -28,8 +28,8 @@ Bridges between [`Contributte\EventDispatcher`](https://github.com/contributte/e
 
 | State       | Version | Branch   | Nette | PHP     |
 |-------------|---------|----------|-------|---------|
-| dev         | `^0.7`  | `master` | 3.0+  | `^7.2`  |
-| stable      | `^0.6`  | `master` | 3.0+  | `^7.2`  |
+| dev         | `^0.8`  | `master` | 3.0+  | `^7.2`  |
+| stable      | `^0.7`  | `master` | 3.0+  | `^7.2`  |
 | stable      | `^0.4`  | `master` | 2.4   | `>=7.1` |
 | stable      | `^0.1`  | `master` | 2.4   | `>=5.6` |
 
