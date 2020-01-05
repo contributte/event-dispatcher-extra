@@ -3,7 +3,7 @@
 namespace Contributte\Events\Extra\Event\Latte;
 
 use Nette\Bridges\ApplicationLatte\Template;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class TemplateCreateEvent extends Event
 {

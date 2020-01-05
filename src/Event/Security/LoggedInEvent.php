@@ -3,7 +3,7 @@
 namespace Contributte\Events\Extra\Event\Security;
 
 use Nette\Security\User;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class LoggedInEvent extends Event
 {

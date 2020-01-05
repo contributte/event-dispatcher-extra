@@ -1,4 +1,0 @@
-parameters:
-	ignoreErrors:
-		# Deprecated with no replacement until 5.0
-		- '#^Class Contributte\\Events\\Extra\\Event\\.+ extends deprecated class Symfony\\Component\\EventDispatcher\\Event.+#'

@@ -3,7 +3,7 @@
 namespace Contributte\Events\Extra\Event\Application;
 
 use Nette\Application\UI\Presenter;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class PresenterStartupEvent extends Event
 {

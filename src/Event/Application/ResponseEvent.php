@@ -4,7 +4,7 @@ namespace Contributte\Events\Extra\Event\Application;
 
 use Nette\Application\Application;
 use Nette\Application\IResponse;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ResponseEvent extends Event
 {

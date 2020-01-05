@@ -3,7 +3,7 @@
 namespace Contributte\Events\Extra\Event\Latte;
 
 use Latte\Engine;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class LatteCompileEvent extends Event
 {

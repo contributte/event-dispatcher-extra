@@ -3,7 +3,7 @@
 namespace Contributte\Events\Extra\Event\Application;
 
 use Nette\Application\Application;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Throwable;
 
 class ShutdownEvent extends Event

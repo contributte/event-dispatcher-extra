@@ -2,7 +2,7 @@
 
 namespace Contributte\Events\Extra\Event\UI;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 abstract class UIEvent extends Event
 {
