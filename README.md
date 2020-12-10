@@ -1,52 +1,54 @@
-# Contributte Event Dispatcher Extra
+![](https://heatbadger.now.sh/github/readme/contributte/event-dispatcher-extra/)
 
-Bridges between [`Contributte\EventDispatcher`](https://github.com/contributte/event-dispatcher) and the Nette packages.
+<p align=center>
+  <a href="https://github.com/contributte/event-dispatcher-extra/actions"><img src="https://badgen.net/github/checks/contributte/event-dispatcher-extra/master?cache=300"></a>
+  <a href="https://coveralls.io/r/contributte/event-dispatcher-extra"><img src="https://badgen.net/coveralls/c/github/contributte/event-dispatcher-extra?cache=300"></a>
+  <a href="https://packagist.org/packages/contributte/event-dispatcher-extra"><img src="https://badgen.net/packagist/dm/contributte/event-dispatcher-extra"></a>
+  <a href="https://packagist.org/packages/contributte/event-dispatcher-extra"><img src="https://badgen.net/packagist/v/contributte/event-dispatcher-extra"></a>
+</p>
+<p align=center>
+  <a href="https://packagist.org/packages/contributte/event-dispatcher-extra"><img src="https://badgen.net/packagist/php/contributte/event-dispatcher-extra"></a>
+  <a href="https://github.com/contributte/event-dispatcher-extra"><img src="https://badgen.net/github/license/contributte/event-dispatcher-extra"></a>
+  <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
+  <a href="https://bit.ly/cttfo"><img src="https://badgen.net/badge/support/forum/yellow"></a>
+  <a href="https://contributte.org/partners.html"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
+</p>
 
-- [`Nette\Application`](https://github.com/nette/application/)
-- [`Nette\Latte`](https://github.com/nette/latte)
-- [`Nette\Security`](https://github.com/nette/security/)
+<p align=center>
+Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻‍💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
+</p>
 
-[![Build Status](https://img.shields.io/travis/contributte/event-dispatcher-extra.svg?style=flat-square)](https://travis-ci.org/contributte/event-dispatcher-extra)
-[![Code coverage](https://img.shields.io/coveralls/contributte/event-dispatcher-extra.svg?style=flat-square)](https://coveralls.io/r/contributte/event-dispatcher-extra)
-[![Licence](https://img.shields.io/packagist/l/contributte/event-dispatcher-extra.svg?style=flat-square)](https://packagist.org/packages/contributte/event-dispatcher-extra)
-[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/event-dispatcher-extra.svg?style=flat-square)](https://packagist.org/packages/contributte/event-dispatcher-extra)
-[![Downloads total](https://img.shields.io/packagist/dt/contributte/event-dispatcher-extra.svg?style=flat-square)](https://packagist.org/packages/contributte/event-dispatcher-extra)
-[![Latest stable](https://img.shields.io/packagist/v/contributte/event-dispatcher-extra.svg?style=flat-square)](https://packagist.org/packages/contributte/event-dispatcher-extra)
-[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+## Usage
 
-## Discussion / Help
+To install the latest version of `contributte/event-dispatcher-extra` use [Composer](https://getcomposer.com).
 
-[![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
+```
+composer require contributte/event-dispatcher-extra
+```
 
 ## Documentation
 
-- [Setup](.docs/README.md#setup)
-- [Events list](.docs/README.md#events-list)
-- [Implementing subscriber](.docs/README.md#subscriber)
+For details on how to use this package, check out our [documentation](.docs).
 
 ## Versions
 
 | State       | Version | Branch   | Nette | PHP     |
 |-------------|---------|----------|-------|---------|
-| dev         | `^0.8`  | `master` | 3.0+  | `>=7.2`  |
-| stable      | `^0.7`  | `master` | 3.0+  | `^7.2`  |
-| stable      | `^0.4`  | `master` | 2.4   | `>=7.1` |
-| stable      | `^0.1`  | `master` | 2.4   | `>=5.6` |
+| dev         | `^0.9`  | `master` | 3.0+  | `>=7.2` |
+| stable      | `^0.8`  | `master` | 3.0+  | `>=7.2` |
+| stable      | `^0.5`  | `master` | 2.4   | `>=7.1` |
 
-## Maintainers
+## Development
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/f3l1x">
-            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=150">
-        </a>
-        </br>
-        <a href="https://github.com/f3l1x">Milan Felix Šulc</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+See [how to contribute](https://contributte.org/contributing.html) to this package.
 
-Thank you for testing, reporting and contributing.
+This package is currently maintaining by these authors.
+
+<a href="https://github.com/f3l1x">
+  <img width="80" height="80" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=80">
+</a>
+
+-----
+
+Consider to [support](https://contributte.org/partners.html) **contributte** development team.
+Also thank you for using this package.
