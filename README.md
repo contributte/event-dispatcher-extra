@@ -22,8 +22,8 @@ Website ðŸš€ <a href="https://contributte.org">contributte.org</a> | Contact ðŸ‘
 
 To install the latest version of `contributte/event-dispatcher-extra` use [Composer](https://getcomposer.org).
 
-```
-$ composer require contributte/event-dispatcher-extra
+```bash
+composer require contributte/event-dispatcher-extra
 ```
 
 ## Documentation
