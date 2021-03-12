@@ -18,26 +18,26 @@ composer require contributte/event-dispatcher-extra
 
 Register extension
 
-```yaml
+```neon
 extensions:
-    # register all event bridges
-    events.extra: Contributte\Events\Extra\DI\EventBridgesExtension
+	# register all event bridges
+	events.extra: Contributte\Events\Extra\DI\EventBridgesExtension
 
 events.extra:
-    # optionally disable these bridges
-    application: false
-    security: false
-    latte: false
+	# optionally disable these bridges
+	application: false
+	security: false
+	latte: false
 ```
 
 You can also register bridges one by one.
 
-```yaml
+```neon
 extensions:
-    # register only bridges of your choice
-    events.application: Contributte\Events\Extra\DI\EventApplicationBridgeExtension
-    events.security: Contributte\Events\Extra\DI\EventSecurityBridgeExtension
-    events.latte: Contributte\Events\Extra\DI\EventLatteBridgeExtension
+	# register only bridges of your choice
+	events.application: Contributte\Events\Extra\DI\EventApplicationBridgeExtension
+	events.security: Contributte\Events\Extra\DI\EventSecurityBridgeExtension
+	events.latte: Contributte\Events\Extra\DI\EventLatteBridgeExtension
 ```
 
 ## Events list
@@ -66,7 +66,7 @@ use Contributte\Events\Extra\Event\Application\PresenterShutdownEvent;
 
 **Latte events:**
 
-Connected to `Latte\Engine::$onCompile` event 
+Connected to `Latte\Engine::$onCompile` event
 
 ```php
 use Contributte\Events\Extra\Event\Latte\LatteCompileEvent;
@@ -105,6 +105,6 @@ final class LogRequestSubscriber implements EventSubscriberInterface
     {
         // Do magic..
     }
-    
+
 }
 ```
