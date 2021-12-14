@@ -1,0 +1,8 @@
+parameters:
+	checkGenericClassInNonGenericObjectType: no
+
+	ignoreErrors:
+		- '#Array \(array<Nette\\DI\\CompilerExtension>\) does not accept object\.#'
+		- '#Call to an undefined method object::setCompiler\(\)\.#'
+		- '#Call to an undefined method object::setConfig\(\)\.#'
+		- '#Call to an undefined method object::loadConfiguration\(\)\.#'

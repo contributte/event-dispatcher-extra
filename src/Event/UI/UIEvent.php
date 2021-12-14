@@ -10,7 +10,7 @@ abstract class UIEvent extends Event
 	/** @var UI */
 	private $ui;
 
-	/** @var Changeset */
+	/** @var Changeset<mixed> */
 	private $changeset;
 
 	public function getUi(): UI
@@ -22,6 +22,7 @@ abstract class UIEvent extends Event
 		return $this->ui;
 	}
 
+	/** @return Changeset<mixed> */
 	public function getChangeset(): Changeset
 	{
 		if ($this->changeset === null) {
