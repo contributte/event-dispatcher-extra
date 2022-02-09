@@ -6,6 +6,8 @@
 
 use Contributte\EventDispatcher\DI\EventDispatcherExtension;
 use Contributte\Events\Extra\DI\EventSecurityBridgeExtension;
+use Nette\Bridges\HttpDI\HttpExtension;
+use Nette\Bridges\HttpDI\SessionExtension;
 use Nette\Bridges\SecurityDI\SecurityExtension;
 use Nette\DI\Compiler;
 use Nette\DI\Container;
@@ -23,7 +25,7 @@ test(function (): void {
 		$loader = new ContainerLoader(TEMP_DIR, true);
 		$loader->load(function (Compiler $compiler): void {
 			$compiler->addExtension('events2security', new EventSecurityBridgeExtension());
-		}, 1);
+		}, __FILE__ . '1');
 	}, LogicException::class, 'Service of type "Nette\Security\User" is needed. Please register it.');
 });
 
@@ -32,13 +34,14 @@ test(function (): void {
 	$class = $loader->load(function (Compiler $compiler): void {
 		$compiler->loadConfig(FileMock::create('
 			services:
-				security.userStorage: Tests\Fixtures\FakeUserStorage
 				fake.loggedin.subscriber: Tests\Fixtures\FakeLoggedInSubscriber
 		', 'neon'));
 		$compiler->addExtension('security', new SecurityExtension());
+		$compiler->addExtension('session', new SessionExtension());
+		$compiler->addExtension('http', new HttpExtension());
 		$compiler->addExtension('events', new EventDispatcherExtension());
 		$compiler->addExtension('events2security', new EventSecurityBridgeExtension());
-	}, 2);
+	}, __FILE__ . '2');
 
 	/** @var Container $container */
 	$container = new $class();

@@ -3,21 +3,22 @@
 namespace Contributte\Events\Extra\Event\UI;
 
 use Nette\Application\UI\Control;
+use stdClass;
 
 class UI
 {
 
-	/** @var mixed[] */
+	/** @var array<int, stdClass> */
 	private $messages = [];
 
 	/** @var string[] */
 	private $snippets = [];
 
-	/** @var mixed */
+	/** @var stdClass */
 	private $redirect;
 
 	/**
-	 * @return mixed[]
+	 * @return array<int, stdClass>
 	 */
 	public function getMessages(): array
 	{
@@ -25,7 +26,7 @@ class UI
 	}
 
 	/**
-	 * @param mixed[] $messages
+	 * @param array<int, stdClass> $messages
 	 */
 	public function setMessages(array $messages): void
 	{

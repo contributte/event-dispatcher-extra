@@ -1,8 +1,8 @@
 parameters:
-	checkGenericClassInNonGenericObjectType: no
+	level: 9
+	phpVersion: 70200
+
+	paths:
+		- src
 
 	ignoreErrors:
-		- '#Array \(array<Nette\\DI\\CompilerExtension>\) does not accept object\.#'
-		- '#Call to an undefined method object::setCompiler\(\)\.#'
-		- '#Call to an undefined method object::setConfig\(\)\.#'
-		- '#Call to an undefined method object::loadConfiguration\(\)\.#'

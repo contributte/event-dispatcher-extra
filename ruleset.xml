@@ -6,10 +6,10 @@
 	<!-- Specific rules -->
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
-			<property name="rootNamespaces" type="array" value="
-				src=>Contributte\Events\Extra,
-				tests/fixtures=>Tests\Fixtures
-			"/>
+			<property name="rootNamespaces" type="array">
+				<element key="src" value="Contributte\Events\Extra"/>
+				<element key="tests" value="Tests"/>
+			</property>
 		</properties>
 	</rule>
 

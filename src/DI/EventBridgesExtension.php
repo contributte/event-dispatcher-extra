@@ -22,14 +22,14 @@ class EventBridgesExtension extends CompilerExtension
 		])->castTo('array');
 	}
 
-	/** @var string[] */
+	/** @var array<string, class-string<CompilerExtension>> */
 	private $map = [
 		'application' => EventApplicationBridgeExtension::class,
 		'latte' => EventLatteBridgeExtension::class,
 		'security' => EventSecurityBridgeExtension::class,
 	];
 
-	/** @var CompilerExtension[] */
+	/** @var array<string, CompilerExtension> */
 	private $passes = [];
 
 	/**
@@ -44,15 +44,18 @@ class EventBridgesExtension extends CompilerExtension
 				continue;
 			}
 
-			// Register sub extension a.k.a CompilerPass
-			$this->passes[$bridge] = new $this->map[$bridge]();
-			$this->passes[$bridge]->setCompiler($this->compiler, $this->prefix($bridge));
+			/** @var CompilerExtension $pass */
+			$pass = new $this->map[$bridge]();
+			$pass->setCompiler($this->compiler, $this->prefix($bridge));
 
 			if ($bridgeConfig !== null) {
-				$this->passes[$bridge]->setConfig($bridgeConfig);
+				$pass->setConfig((array) $bridgeConfig);
 			}
 
-			$this->passes[$bridge]->loadConfiguration();
+			$pass->loadConfiguration();
+
+			// Register sub extension a.k.a CompilerPass
+			$this->passes[$bridge] = $pass;
 		}
 	}
 

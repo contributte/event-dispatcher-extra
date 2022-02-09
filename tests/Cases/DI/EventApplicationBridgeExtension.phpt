@@ -27,7 +27,7 @@ test(function (): void {
 		$loader = new ContainerLoader(TEMP_DIR, true);
 		$loader->load(function (Compiler $compiler): void {
 			$compiler->addExtension('events2application', new EventApplicationBridgeExtension());
-		}, 1);
+		}, __FILE__ . '1');
 	}, LogicException::class, 'Service of type "Nette\Application\Application" is needed. Please register it.');
 });
 
@@ -45,7 +45,7 @@ test(function (): void {
 		$compiler->addExtension('http', new HttpExtension());
 		$compiler->addExtension('events', new EventDispatcherExtension());
 		$compiler->addExtension('events2application', new EventApplicationBridgeExtension());
-	}, 2);
+	}, __FILE__ . '2');
 
 	/** @var Container $container */
 	$container = new $class();

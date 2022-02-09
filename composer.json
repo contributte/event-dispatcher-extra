@@ -29,11 +29,11 @@
   "require-dev": {
     "contributte/event-dispatcher": "^0.8.0",
     "latte/latte": "^2.5.1",
-    "nette/application": "~3.0.0",
-    "nette/http": "~3.0.1",
-    "nette/security": "~3.0.0",
+    "nette/application": "^3.0.0",
+    "nette/http": "^3.0.1",
+    "nette/security": "^3.0.0",
     "ninjify/nunjuck": "^0.4.0",
-    "ninjify/qa": "^0.12.0",
+    "ninjify/qa": "^0.13.0",
     "phpstan/extension-installer": "^1.0",
     "phpstan/phpstan-deprecation-rules": "^1.0",
     "phpstan/phpstan-nette": "^1.0",
@@ -50,7 +50,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Fixtures\\": "tests/fixtures"
+      "Tests\\": "tests"
     }
   },
   "minimum-stability": "dev",

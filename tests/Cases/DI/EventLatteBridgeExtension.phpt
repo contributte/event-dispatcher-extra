@@ -28,7 +28,7 @@ test(function (): void {
 		$loader = new ContainerLoader(TEMP_DIR, true);
 		$loader->load(function (Compiler $compiler): void {
 			$compiler->addExtension('events2latte', new EventLatteBridgeExtension());
-		}, 1);
+		}, __FILE__ . '1');
 	}, LogicException::class, 'Service of type "Nette\Bridges\ApplicationLatte\ILatteFactory" is needed. Please register it.');
 });
 
@@ -45,7 +45,7 @@ test(function (): void {
 		$compiler->addExtension('latte', new LatteExtension(TEMP_DIR));
 		$compiler->addExtension('events', new EventDispatcherExtension());
 		$compiler->addExtension('events2latte', new EventLatteBridgeExtension());
-	}, 2);
+	}, __FILE__ . '2');
 
 	/** @var Container $container */
 	$container = new $class();
@@ -64,7 +64,7 @@ test(function (): void {
 	$subscriber = $container->getByType(FakeLatteCompileSubscriber::class);
 	$application->run();
 
-	$engine->renderToString(__DIR__ . '/../../fixtures/LatteCompileTestFile.latte'); //trigger onCompile
+	$engine->renderToString(__DIR__ . '/../../Fixtures/LatteCompileTestFile.latte'); //trigger onCompile
 	Assert::count(1, $subscriber->onCall);
 	Assert::equal($engine, $subscriber->onCall[0]->getEngine());
 });
@@ -82,7 +82,7 @@ test(function (): void {
 		$compiler->addExtension('latte', new LatteExtension(TEMP_DIR));
 		$compiler->addExtension('events', new EventDispatcherExtension());
 		$compiler->addExtension('events2latte', new EventLatteBridgeExtension());
-	}, 3);
+	}, __FILE__ . '3');
 
 	/** @var Container $container */
 	$container = new $class();

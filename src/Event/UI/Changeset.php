@@ -6,6 +6,9 @@ use ArrayIterator;
 use Contributte\EventDispatcher\Exceptions\Logical\InvalidStateException;
 use IteratorAggregate;
 
+/**
+ * @phpstan-implements IteratorAggregate<string, mixed>
+ */
 class Changeset implements IteratorAggregate
 {
 
@@ -50,6 +53,9 @@ class Changeset implements IteratorAggregate
 		return $this->changeset;
 	}
 
+	/**
+	 * @return ArrayIterator<string, mixed>
+	 */
 	public function getIterator(): ArrayIterator
 	{
 		return new ArrayIterator($this->changeset);
