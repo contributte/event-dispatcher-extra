@@ -38,6 +38,8 @@ class EventBridgesExtension extends CompilerExtension
 	public function loadConfiguration(): void
 	{
 		$config = $this->config;
+
+		/** @var false|array<mixed>|object|null $bridgeConfig */
 		foreach ($config as $bridge => $bridgeConfig) {
 			// Don't register sub extension
 			if ($bridgeConfig === false) {
@@ -49,7 +51,7 @@ class EventBridgesExtension extends CompilerExtension
 			$pass->setCompiler($this->compiler, $this->prefix($bridge));
 
 			if ($bridgeConfig !== null) {
-				$pass->setConfig((array) $bridgeConfig);
+				$pass->setConfig($bridgeConfig);
 			}
 
 			$pass->loadConfiguration();
