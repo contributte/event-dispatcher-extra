@@ -34,11 +34,10 @@
     "nette/security": "^3.0.0",
     "ninjify/nunjuck": "^0.4.0",
     "ninjify/qa": "^0.13.0",
-    "phpstan/extension-installer": "^1.0",
-    "phpstan/phpstan-deprecation-rules": "^1.0",
-    "phpstan/phpstan-nette": "^1.0",
-    "phpstan/phpstan": "^1.0",
-    "phpstan/phpstan-strict-rules": "^1.0"
+    "phpstan/phpstan-deprecation-rules": "^1.1.2",
+    "phpstan/phpstan-nette": "^1.2.4",
+    "phpstan/phpstan": "^1.10.6",
+    "phpstan/phpstan-strict-rules": "^1.5.0"
   },
   "conflict": {
     "nette/di": "<3.0.0"
