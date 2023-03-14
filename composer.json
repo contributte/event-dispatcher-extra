@@ -33,7 +33,7 @@
     "nette/http": "^3.0.1",
     "nette/security": "^3.0.0",
     "ninjify/nunjuck": "^0.4.0",
-    "ninjify/qa": "^0.13.0",
+    "ninjify/qa": "^0.14.0",
     "phpstan/phpstan-deprecation-rules": "^1.1.2",
     "phpstan/phpstan-nette": "^1.2.4",
     "phpstan/phpstan": "^1.10.6",
