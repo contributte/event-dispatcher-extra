@@ -39,9 +39,6 @@
     "phpstan/phpstan": "^1.10.6",
     "phpstan/phpstan-strict-rules": "^1.5.0"
   },
-  "conflict": {
-    "nette/di": "<3.0.0"
-  },
   "autoload": {
     "psr-4": {
       "Contributte\\Events\\Extra\\": "src"
