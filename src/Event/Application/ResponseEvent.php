@@ -3,7 +3,7 @@
 namespace Contributte\Events\Extra\Event\Application;
 
 use Nette\Application\Application;
-use Nette\Application\IResponse;
+use Nette\Application\Response;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class ResponseEvent extends Event
@@ -12,10 +12,10 @@ class ResponseEvent extends Event
 	/** @var Application */
 	private $application;
 
-	/** @var IResponse */
+	/** @var Response */
 	private $response;
 
-	public function __construct(Application $application, IResponse $response)
+	public function __construct(Application $application, Response $response)
 	{
 		$this->application = $application;
 		$this->response = $response;
@@ -26,7 +26,7 @@ class ResponseEvent extends Event
 		return $this->application;
 	}
 
-	public function getResponse(): IResponse
+	public function getResponse(): Response
 	{
 		return $this->response;
 	}

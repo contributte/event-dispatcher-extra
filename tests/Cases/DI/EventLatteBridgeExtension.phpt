@@ -7,10 +7,9 @@
 use Contributte\EventDispatcher\DI\EventDispatcherExtension;
 use Contributte\Events\Extra\DI\EventLatteBridgeExtension;
 use Nette\Application\Application;
-use Nette\Application\UI\ITemplateFactory;
 use Nette\Bridges\ApplicationDI\ApplicationExtension;
 use Nette\Bridges\ApplicationDI\LatteExtension;
-use Nette\Bridges\ApplicationLatte\ILatteFactory;
+use Nette\Bridges\ApplicationLatte\LatteFactory;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\Bridges\HttpDI\HttpExtension;
 use Nette\DI\Compiler;
@@ -29,7 +28,7 @@ test(function (): void {
 		$loader->load(function (Compiler $compiler): void {
 			$compiler->addExtension('events2latte', new EventLatteBridgeExtension());
 		}, __FILE__ . '1');
-	}, LogicException::class, 'Service of type "Nette\Bridges\ApplicationLatte\ILatteFactory" is needed. Please register it.');
+	}, LogicException::class, 'Service of type "Nette\Bridges\ApplicationLatte\LatteFactory" is needed. Please register it.');
 });
 
 test(function (): void {
@@ -55,8 +54,8 @@ test(function (): void {
 
 	/** @var Application $application */
 	$application = $container->getByType(Application::class);
-	/** @var ILatteFactory $factory */
-	$factory = $container->getByType(ILatteFactory::class);
+	/** @var LatteFactory $factory */
+	$factory = $container->getByType(LatteFactory::class);
 	$engine = $factory->create();
 	Assert::count(1, $engine->onCompile);
 
@@ -91,7 +90,7 @@ test(function (): void {
 	Assert::false($container->isCreated('fake.template.create.subscriber'));
 
 	/** @var TemplateFactory $factory */
-	$factory = $container->getByType(ITemplateFactory::class);
+	$factory = $container->getByType(TemplateFactory::class);
 	Assert::count(1, $factory->onCreate);
 
 	/** @var FakeTemplateCreateSubscriber $subscriber */

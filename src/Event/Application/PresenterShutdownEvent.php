@@ -2,7 +2,7 @@
 
 namespace Contributte\Events\Extra\Event\Application;
 
-use Nette\Application\IResponse;
+use Nette\Application\Response;
 use Nette\Application\UI\Presenter;
 use Symfony\Contracts\EventDispatcher\Event;
 
@@ -12,10 +12,10 @@ class PresenterShutdownEvent extends Event
 	/** @var Presenter */
 	private $presenter;
 
-	/** @var IResponse */
+	/** @var Response */
 	private $response;
 
-	public function __construct(Presenter $presenter, IResponse $response)
+	public function __construct(Presenter $presenter, Response $response)
 	{
 		$this->presenter = $presenter;
 		$this->response = $response;
@@ -26,7 +26,7 @@ class PresenterShutdownEvent extends Event
 		return $this->presenter;
 	}
 
-	public function getResponse(): IResponse
+	public function getResponse(): Response
 	{
 		return $this->response;
 	}

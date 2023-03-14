@@ -14,8 +14,8 @@ use LogicException;
 use Nette\Application\Application;
 use Nette\Application\UI\Presenter;
 use Nette\DI\CompilerExtension;
-use Nette\DI\ServiceDefinition;
-use Nette\PhpGenerator\PhpLiteral;
+use Nette\DI\Definitions\ServiceDefinition;
+use Nette\PhpGenerator\Literal;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EventApplicationBridgeExtension extends CompilerExtension
@@ -44,51 +44,51 @@ class EventApplicationBridgeExtension extends CompilerExtension
 		$application->addSetup('?->onStartup[] = function() {?->dispatch(new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			new PhpLiteral(StartupEvent::class),
+			new Literal(StartupEvent::class),
 		]);
 
 		$application->addSetup('?->onError[] = function() {?->dispatch(new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			new PhpLiteral(ErrorEvent::class),
+			new Literal(ErrorEvent::class),
 		]);
 
 		$application->addSetup('?->onPresenter[] = function() {?->dispatch(new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			new PhpLiteral(PresenterEvent::class),
+			new Literal(PresenterEvent::class),
 		]);
 
 		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!$presenter instanceof ?){return;} $presenter->onStartup[] = function() {?->dispatch(new ?(...func_get_args()));};}', [
 			'@self',
-			new PhpLiteral(Presenter::class),
+			new Literal(Presenter::class),
 			$dispatcher,
-			new PhpLiteral(PresenterStartupEvent::class),
+			new Literal(PresenterStartupEvent::class),
 		]);
 
 		$application->addSetup('?->onPresenter[] = function($application, $presenter) {if(!$presenter instanceof ?){return;} $presenter->onShutdown[] = function() {?->dispatch(new ?(...func_get_args()));};}', [
 			'@self',
-			new PhpLiteral(Presenter::class),
+			new Literal(Presenter::class),
 			$dispatcher,
-			new PhpLiteral(PresenterShutdownEvent::class),
+			new Literal(PresenterShutdownEvent::class),
 		]);
 
 		$application->addSetup('?->onRequest[] = function() {?->dispatch(new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			new PhpLiteral(RequestEvent::class),
+			new Literal(RequestEvent::class),
 		]);
 
 		$application->addSetup('?->onResponse[] = function() {?->dispatch(new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			new PhpLiteral(ResponseEvent::class),
+			new Literal(ResponseEvent::class),
 		]);
 
 		$application->addSetup('?->onShutdown[] = function() {?->dispatch(new ?(...func_get_args()));}', [
 			'@self',
 			$dispatcher,
-			new PhpLiteral(ShutdownEvent::class),
+			new Literal(ShutdownEvent::class),
 		]);
 	}
 

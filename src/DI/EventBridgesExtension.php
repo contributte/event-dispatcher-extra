@@ -74,7 +74,7 @@ class EventBridgesExtension extends CompilerExtension
 	/**
 	 * Decorate initialize method
 	 */
-	public function afterCompile(ClassType $class): void
+	public function afterCompile(ClassType $class)
 	{
 		foreach ($this->passes as $pass) {
 			$pass->afterCompile($class);
