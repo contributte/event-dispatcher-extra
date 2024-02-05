@@ -27,17 +27,17 @@
     "symfony/event-dispatcher": "^6.1.0"
   },
   "require-dev": {
-    "contributte/event-dispatcher": "^0.8.0",
+    "contributte/event-dispatcher": "^0.9.0",
     "latte/latte": "^2.11.6",
     "nette/application": "^3.1.10",
     "nette/http": "^3.2.1",
     "nette/security": "^3.1.7",
-    "ninjify/nunjuck": "^0.4.0",
-    "ninjify/qa": "^0.14.0",
-    "phpstan/phpstan-deprecation-rules": "^1.1.2",
-    "phpstan/phpstan-nette": "^1.2.4",
-    "phpstan/phpstan": "^1.10.6",
-    "phpstan/phpstan-strict-rules": "^1.5.0"
+    "contributte/qa": "^0.4",
+    "contributte/tester": "^0.3",
+    "contributte/phpstan": "^0.1"
+  },
+  "conflict": {
+    "nette/di": "<3.0.0"
   },
   "autoload": {
     "psr-4": {
