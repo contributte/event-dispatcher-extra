@@ -6,6 +6,7 @@ use Contributte\Tester\Environment;
 use Contributte\Tester\Toolkit;
 use Contributte\Tester\Utils\ContainerBuilder;
 use Contributte\Tester\Utils\Neonkit;
+use Latte\Runtime\Template;
 use Nette\Application\Application;
 use Nette\Bridges\ApplicationDI\ApplicationExtension;
 use Nette\Bridges\ApplicationDI\LatteExtension;
@@ -14,7 +15,7 @@ use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\Bridges\HttpDI\HttpExtension;
 use Nette\DI\Compiler;
 use Tester\Assert;
-use Tests\Fixtures\FakeLatteCompileSubscriber;
+use Tests\Fixtures\FakeLatteSubscriber;
 use Tests\Fixtures\FakeTemplateCreateSubscriber;
 
 require_once __DIR__ . '/../../bootstrap.php';
@@ -34,7 +35,7 @@ Toolkit::test(function (): void {
 			$compiler->addConfig(Neonkit::load(<<<'NEON'
 				services:
 					- Nette\Application\Routers\RouteList
-					fake.latte.compile.subscriber: Tests\Fixtures\FakeLatteCompileSubscriber
+					fake.latte.compile.subscriber: Tests\Fixtures\FakeLatteSubscriber
 			NEON
 			));
 			$compiler->addExtension('application', new ApplicationExtension());
@@ -52,15 +53,16 @@ Toolkit::test(function (): void {
 	/** @var LatteFactory $factory */
 	$factory = $container->getByType(LatteFactory::class);
 	$engine = $factory->create();
-	Assert::count(1, $engine->onCompile);
+	Assert::count(3, $engine->getExtensions());
 
-	/** @var FakeLatteCompileSubscriber $subscriber */
-	$subscriber = $container->getByType(FakeLatteCompileSubscriber::class);
+	/** @var FakeLatteSubscriber $subscriber */
+	$subscriber = $container->getByType(FakeLatteSubscriber::class);
 	$application->run();
 
-	$engine->renderToString(__DIR__ . '/../../Fixtures/LatteCompileTestFile.latte'); //trigger onCompile
-	Assert::count(1, $subscriber->onCall);
+	$engine->renderToString(__DIR__ . '/../../Fixtures/LatteTestFile.latte'); //trigger onCompile
+	Assert::count(2, $subscriber->onCall);
 	Assert::equal($engine, $subscriber->onCall[0]->getEngine());
+	Assert::type(Template::class, $subscriber->onCall[1]->getTemplate());
 });
 
 Toolkit::test(function (): void {

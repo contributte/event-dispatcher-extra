@@ -5,7 +5,7 @@ namespace Contributte\Events\Extra\Event\Latte;
 use Latte\Engine;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class LatteCompileEvent extends Event
+class LatteBeforeCompileEvent extends Event
 {
 
 	private Engine $engine;

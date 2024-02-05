@@ -2,14 +2,15 @@
 
 namespace Contributte\Events\Extra\DI;
 
-use Contributte\Events\Extra\Event\Latte\LatteCompileEvent;
 use Contributte\Events\Extra\Event\Latte\TemplateCreateEvent;
+use Contributte\Events\Extra\Latte\EventExtension;
 use LogicException;
 use Nette\Bridges\ApplicationLatte\LatteFactory;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\FactoryDefinition;
 use Nette\DI\Definitions\ServiceDefinition;
+use Nette\DI\Definitions\Statement;
 use Nette\PhpGenerator\Literal;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -35,11 +36,7 @@ class EventLatteBridgeExtension extends CompilerExtension
 
 		$latteEngine
 			->getResultDefinition()
-			->addSetup('?->onCompile[] = function() {?->dispatch(new ?(...func_get_args()));}', [
-				'@self',
-				$dispatcher,
-				new Literal(LatteCompileEvent::class),
-			]);
+			->addSetup('addExtension', [new Statement(EventExtension::class)]);
 
 		$templateFactories = $builder->findByType(TemplateFactory::class);
 		foreach ($templateFactories as $templateFactory) {

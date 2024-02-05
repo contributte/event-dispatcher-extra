@@ -69,7 +69,7 @@ use Contributte\Events\Extra\Event\Application\PresenterShutdownEvent;
 Connected to `Latte\Engine::$onCompile` event
 
 ```php
-use Contributte\Events\Extra\Event\Latte\LatteCompileEvent;
+use Contributte\Events\Extra\Event\Latte\LatteBeforeCompileEvent;
 ```
 
 Connected to `Nette\Bridges\ApplicationLatte\TemplateFactory::$onCreate` event
