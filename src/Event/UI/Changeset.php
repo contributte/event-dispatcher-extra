@@ -3,7 +3,7 @@
 namespace Contributte\Events\Extra\Event\UI;
 
 use ArrayIterator;
-use Contributte\EventDispatcher\Exceptions\Logical\InvalidStateException;
+use Contributte\Events\Extra\Exceptions\LogicalException;
 use IteratorAggregate;
 
 /**
@@ -13,33 +13,22 @@ class Changeset implements IteratorAggregate
 {
 
 	/** @var mixed[] */
-	private $changeset = [];
+	private array $changeset = [];
 
-	/**
-	 * @param string|int $key
-	 * @param mixed      $value
-	 */
-	public function add($key, $value): void
+	public function add(string|int $key, mixed $value): void
 	{
 		$this->changeset[$key] = $value;
 	}
 
-	/**
-	 * @param string|int $key
-	 */
-	public function has($key): bool
+	public function has(string|int $key): bool
 	{
 		return array_key_exists($key, $this->changeset);
 	}
 
-	/**
-	 * @param string|int $key
-	 * @return mixed
-	 */
-	public function get($key)
+	public function get(string|int $key): mixed
 	{
 		if (!$this->has($key)) {
-			throw new InvalidStateException(sprintf('Key %s does not exist in this changeset', (string) $key));
+			throw new LogicalException(sprintf('Key %s does not exist in this changeset', (string) $key));
 		}
 
 		return $this->changeset[$key];

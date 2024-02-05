@@ -9,11 +9,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 class PresenterEvent extends Event
 {
 
-	/** @var Application */
-	private $application;
+	private Application $application;
 
-	/** @var IPresenter */
-	private $presenter;
+	private IPresenter $presenter;
 
 	public function __construct(Application $application, IPresenter $presenter)
 	{

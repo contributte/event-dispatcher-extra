@@ -13,6 +13,16 @@ use Nette\Schema\Schema;
 class EventBridgesExtension extends CompilerExtension
 {
 
+	/** @var array<string, class-string<CompilerExtension>> */
+	private array $map = [
+		'application' => EventApplicationBridgeExtension::class,
+		'latte' => EventLatteBridgeExtension::class,
+		'security' => EventSecurityBridgeExtension::class,
+	];
+
+	/** @var array<string, CompilerExtension> */
+	private array $passes = [];
+
 	public function getConfigSchema(): Schema
 	{
 		return Expect::structure([
@@ -21,16 +31,6 @@ class EventBridgesExtension extends CompilerExtension
 			'security' => Expect::anyOf(false),
 		])->castTo('array');
 	}
-
-	/** @var array<string, class-string<CompilerExtension>> */
-	private $map = [
-		'application' => EventApplicationBridgeExtension::class,
-		'latte' => EventLatteBridgeExtension::class,
-		'security' => EventSecurityBridgeExtension::class,
-	];
-
-	/** @var array<string, CompilerExtension> */
-	private $passes = [];
 
 	/**
 	 * Register services
@@ -74,7 +74,7 @@ class EventBridgesExtension extends CompilerExtension
 	/**
 	 * Decorate initialize method
 	 */
-	public function afterCompile(ClassType $class)
+	public function afterCompile(ClassType $class): void
 	{
 		foreach ($this->passes as $pass) {
 			$pass->afterCompile($class);

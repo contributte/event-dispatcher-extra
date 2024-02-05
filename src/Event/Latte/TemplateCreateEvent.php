@@ -8,8 +8,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 class TemplateCreateEvent extends Event
 {
 
-	/** @var Template */
-	private $template;
+	private Template $template;
 
 	public function __construct(Template $template)
 	{

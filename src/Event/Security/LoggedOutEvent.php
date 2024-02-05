@@ -8,8 +8,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 class LoggedOutEvent extends Event
 {
 
-	/** @var User */
-	private $user;
+	private User $user;
 
 	public function __construct(User $user)
 	{

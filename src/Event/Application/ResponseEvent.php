@@ -9,11 +9,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 class ResponseEvent extends Event
 {
 
-	/** @var Application */
-	private $application;
+	private Application $application;
 
-	/** @var Response */
-	private $response;
+	private Response $response;
 
 	public function __construct(Application $application, Response $response)
 	{

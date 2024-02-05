@@ -8,8 +8,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 class StartupEvent extends Event
 {
 
-	/** @var Application */
-	private $application;
+	private Application $application;
 
 	public function __construct(Application $application)
 	{

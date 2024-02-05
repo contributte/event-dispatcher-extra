@@ -8,8 +8,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 class LatteCompileEvent extends Event
 {
 
-	/** @var Engine */
-	private $engine;
+	private Engine $engine;
 
 	public function __construct(Engine $engine)
 	{

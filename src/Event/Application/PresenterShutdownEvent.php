@@ -9,11 +9,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 class PresenterShutdownEvent extends Event
 {
 
-	/** @var Presenter */
-	private $presenter;
+	private Presenter $presenter;
 
-	/** @var Response */
-	private $response;
+	private Response $response;
 
 	public function __construct(Presenter $presenter, Response $response)
 	{

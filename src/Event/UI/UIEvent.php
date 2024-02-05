@@ -7,11 +7,10 @@ use Symfony\Contracts\EventDispatcher\Event;
 abstract class UIEvent extends Event
 {
 
-	/** @var UI */
-	private $ui;
+	private ?UI $ui = null;
 
 	/** @var Changeset<mixed> */
-	private $changeset;
+	private ?Changeset $changeset = null;
 
 	public function getUi(): UI
 	{

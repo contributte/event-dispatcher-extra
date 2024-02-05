@@ -8,8 +8,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 class PresenterStartupEvent extends Event
 {
 
-	/** @var Presenter */
-	private $presenter;
+	private Presenter $presenter;
 
 	public function __construct(Presenter $presenter)
 	{

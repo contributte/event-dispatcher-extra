@@ -9,11 +9,9 @@ use Throwable;
 class ShutdownEvent extends Event
 {
 
-	/** @var Application */
-	private $application;
+	private Application $application;
 
-	/** @var Throwable|null */
-	private $throwable;
+	private ?Throwable $throwable = null;
 
 	public function __construct(Application $application, ?Throwable $throwable = null)
 	{

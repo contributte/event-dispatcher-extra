@@ -9,11 +9,9 @@ use Throwable;
 class ErrorEvent extends Event
 {
 
-	/** @var Application */
-	private $application;
+	private Application $application;
 
-	/** @var Throwable */
-	private $throwable;
+	private Throwable $throwable;
 
 	public function __construct(Application $application, Throwable $throwable)
 	{

@@ -9,13 +9,12 @@ class UI
 {
 
 	/** @var array<int, stdClass> */
-	private $messages = [];
+	private array $messages = [];
 
 	/** @var string[] */
-	private $snippets = [];
+	private array $snippets = [];
 
-	/** @var stdClass */
-	private $redirect;
+	private ?stdClass $redirect = null;
 
 	/**
 	 * @return array<int, stdClass>
@@ -74,10 +73,7 @@ class UI
 		$this->snippets[] = $snippet;
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getRedirect()
+	public function getRedirect(): ?stdClass
 	{
 		return $this->redirect;
 	}
