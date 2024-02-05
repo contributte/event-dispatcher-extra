@@ -9,7 +9,7 @@ final class FakeLatteCompileSubscriber implements EventSubscriberInterface
 {
 
 	/** @var LatteCompileEvent[] */
-	public $onCall = [];
+	public array $onCall = [];
 
 	/**
 	 * @return string[]

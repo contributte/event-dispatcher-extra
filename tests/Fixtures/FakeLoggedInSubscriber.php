@@ -9,7 +9,7 @@ final class FakeLoggedInSubscriber implements EventSubscriberInterface
 {
 
 	/** @var LoggedInEvent[] */
-	public $onCall = [];
+	public array $onCall = [];
 
 	/**
 	 * @return string[]

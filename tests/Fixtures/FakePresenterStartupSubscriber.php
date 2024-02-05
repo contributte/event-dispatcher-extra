@@ -9,7 +9,7 @@ class FakePresenterStartupSubscriber implements EventSubscriberInterface
 {
 
 	/** @var PresenterStartupEvent[] */
-	public $onCall = [];
+	public array $onCall = [];
 
 	/**
 	 * @return string[]

@@ -9,7 +9,7 @@ class FakePresenterShutdownSubscriber implements EventSubscriberInterface
 {
 
 	/** @var PresenterShutdownEvent[] */
-	public $onCall = [];
+	public array $onCall = [];
 
 	/**
 	 * @return string[]

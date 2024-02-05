@@ -9,7 +9,7 @@ final class FakeStartupSubscriber implements EventSubscriberInterface
 {
 
 	/** @var StartupEvent[] */
-	public $onCall = [];
+	public array $onCall = [];
 
 	/**
 	 * @return string[]

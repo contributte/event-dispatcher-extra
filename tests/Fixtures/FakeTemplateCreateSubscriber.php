@@ -9,7 +9,7 @@ final class FakeTemplateCreateSubscriber implements EventSubscriberInterface
 {
 
 	/** @var TemplateCreateEvent[] */
-	public $onCall = [];
+	public array $onCall = [];
 
 	/**
 	 * @return string[]

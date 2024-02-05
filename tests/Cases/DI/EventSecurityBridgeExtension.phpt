@@ -1,50 +1,44 @@
 <?php declare(strict_types = 1);
 
-/**
- * Test: DI\EventSecurityBridgeExtension
- */
-
 use Contributte\EventDispatcher\DI\EventDispatcherExtension;
 use Contributte\Events\Extra\DI\EventSecurityBridgeExtension;
+use Contributte\Tester\Toolkit;
+use Contributte\Tester\Utils\ContainerBuilder;
+use Contributte\Tester\Utils\Neonkit;
 use Nette\Bridges\HttpDI\HttpExtension;
 use Nette\Bridges\HttpDI\SessionExtension;
 use Nette\Bridges\SecurityDI\SecurityExtension;
 use Nette\DI\Compiler;
-use Nette\DI\Container;
-use Nette\DI\ContainerLoader;
-use Nette\Security\Identity;
+use Nette\Security\SimpleIdentity;
 use Nette\Security\User;
 use Tester\Assert;
-use Tester\FileMock;
 use Tests\Fixtures\FakeLoggedInSubscriber;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-test(function (): void {
+Toolkit::test(function (): void {
 	Assert::exception(function (): void {
-		$loader = new ContainerLoader(TEMP_DIR, true);
-		$loader->load(function (Compiler $compiler): void {
-			$compiler->addExtension('events2security', new EventSecurityBridgeExtension());
-		}, __FILE__ . '1');
+		ContainerBuilder::of()
+			->withCompiler(function (Compiler $compiler): void {
+				$compiler->addExtension('events2security', new EventSecurityBridgeExtension());
+			})->build();
 	}, LogicException::class, 'Service of type "Nette\Security\User" is needed. Please register it.');
 });
 
-test(function (): void {
-	$loader = new ContainerLoader(TEMP_DIR, true);
-	$class = $loader->load(function (Compiler $compiler): void {
-		$compiler->loadConfig(FileMock::create('
-			services:
-				fake.loggedin.subscriber: Tests\Fixtures\FakeLoggedInSubscriber
-		', 'neon'));
-		$compiler->addExtension('security', new SecurityExtension());
-		$compiler->addExtension('session', new SessionExtension());
-		$compiler->addExtension('http', new HttpExtension());
-		$compiler->addExtension('events', new EventDispatcherExtension());
-		$compiler->addExtension('events2security', new EventSecurityBridgeExtension());
-	}, __FILE__ . '2');
-
-	/** @var Container $container */
-	$container = new $class();
+Toolkit::test(function (): void {
+	$container = ContainerBuilder::of()
+		->withCompiler(function (Compiler $compiler): void {
+			$compiler->addConfig(Neonkit::load(<<<'NEON'
+				services:
+					fake.loggedin.subscriber: Tests\Fixtures\FakeLoggedInSubscriber
+			NEON
+			));
+			$compiler->addExtension('security', new SecurityExtension());
+			$compiler->addExtension('session', new SessionExtension());
+			$compiler->addExtension('http', new HttpExtension());
+			$compiler->addExtension('events', new EventDispatcherExtension());
+			$compiler->addExtension('events2security', new EventSecurityBridgeExtension());
+		})->build();
 
 	// Subscriber is still not created
 	Assert::false($container->isCreated('fake.loggedin.subscriber'));
@@ -55,7 +49,7 @@ test(function (): void {
 
 	/** @var FakeLoggedInSubscriber $subscriber */
 	$subscriber = $container->getByType(FakeLoggedInSubscriber::class);
-	$user->login(new Identity(1));
+	$user->login(new SimpleIdentity(1));
 
 	Assert::count(1, $subscriber->onCall);
 	Assert::equal($user, $subscriber->onCall[0]->getUser());

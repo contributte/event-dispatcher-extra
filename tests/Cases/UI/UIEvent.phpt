@@ -1,16 +1,13 @@
 <?php declare(strict_types = 1);
 
-/**
- * Test: UI/UIEvent
- */
-
+use Contributte\Tester\Toolkit;
 use Tester\Assert;
 use Tests\Fixtures\FakeUiEvent;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
 // Success message
-test(function (): void {
+Toolkit::test(function (): void {
 	$event = new FakeUiEvent();
 	$event->getUi()->addSuccessMessage('All clear');
 
