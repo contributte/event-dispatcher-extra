@@ -10,6 +10,7 @@ use Nette\Application\Responses\VoidResponse;
 use Nette\Bridges\ApplicationDI\ApplicationExtension;
 use Nette\Bridges\HttpDI\HttpExtension;
 use Nette\DI\Compiler;
+use Nette\Utils\Arrays;
 use Tester\Assert;
 use Tests\Fixtures\FakePresenter;
 use Tests\Fixtures\FakePresenterShutdownSubscriber;
@@ -60,10 +61,10 @@ Toolkit::test(function (): void {
 	Assert::same($application, $startupSubscriber->onCall[0]->getApplication());
 
 	$presenter = new FakePresenter();
-	$application->onPresenter($application, $presenter);
-	$presenter->onStartup($presenter);
+	Arrays::invoke($application->onPresenter, $application, $presenter);
+	Arrays::invoke($presenter->onStartup, $presenter);
 	$response = new VoidResponse();
-	$presenter->onShutdown($presenter, $response);
+	Arrays::invoke($presenter->onShutdown, $presenter, $response);
 
 	/** @var FakePresenterStartupSubscriber $presenterStartupSubscriber */
 	$presenterStartupSubscriber = $container->getByType(FakePresenterStartupSubscriber::class);
