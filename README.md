@@ -18,17 +18,7 @@
 Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻‍💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
 </p>
 
-## Usage
-
-To install the latest version of `contributte/event-dispatcher-extra` use [Composer](https://getcomposer.org).
-
-```bash
-composer require contributte/event-dispatcher-extra
-```
-
-## Documentation
-
-For details on how to use this package, check out our [documentation](.docs).
+Extra event bridges for Nette Application, Security and Latte events using Symfony Event Dispatcher.
 
 ## Versions
 
@@ -37,11 +27,122 @@ For details on how to use this package, check out our [documentation](.docs).
 | dev         | `^0.11` | `master` | 3.1+  | `>=8.1` |
 | stable      | `^0.10` | `master` | 3.1+  | `>=8.1` |
 
+## Installation
+
+To install the latest version of `contributte/event-dispatcher-extra` use [Composer](https://getcomposer.org).
+
+```bash
+composer require contributte/event-dispatcher-extra
+```
+
+## Setup
+
+First of all, setup an event dispatcher integration (e.g. [contributte/event-dispatcher](https://github.com/contributte/event-dispatcher/)).
+
+Register extension:
+
+```neon
+extensions:
+	# register all event bridges
+	events.extra: Contributte\Events\Extra\DI\EventBridgesExtension
+
+events.extra:
+	# optionally disable these bridges
+	application: false
+	security: false
+	latte: false
+```
+
+You can also register bridges one by one.
+
+```neon
+extensions:
+	# register only bridges of your choice
+	events.application: Contributte\Events\Extra\DI\EventApplicationBridgeExtension
+	events.security: Contributte\Events\Extra\DI\EventSecurityBridgeExtension
+	events.latte: Contributte\Events\Extra\DI\EventLatteBridgeExtension
+```
+
+## Events list
+
+There are several events on which you can listen to.
+
+**Nette Application events:**
+
+Connected to `Nette\Application\Application` events.
+
+```php
+use Contributte\Events\Extra\Event\Application\StartupEvent;
+use Contributte\Events\Extra\Event\Application\RequestEvent;
+use Contributte\Events\Extra\Event\Application\PresenterEvent;
+use Contributte\Events\Extra\Event\Application\ResponseEvent;
+use Contributte\Events\Extra\Event\Application\ShutdownEvent;
+use Contributte\Events\Extra\Event\Application\ErrorEvent;
+```
+
+Connected to `Nette\Application\UI\Presenter` events (`Nette\Application\IPresenter` is not supported).
+
+```php
+use Contributte\Events\Extra\Event\Application\PresenterStartupEvent;
+use Contributte\Events\Extra\Event\Application\PresenterShutdownEvent;
+```
+
+**Latte events:**
+
+Connected to `Latte\Engine::$onCompile` event.
+
+```php
+use Contributte\Events\Extra\Event\Latte\LatteBeforeCompileEvent;
+```
+
+Connected to `Latte\Extension::beforeRender()` event.
+
+```php
+use Contributte\Events\Extra\Event\Latte\LatteBeforeRenderEvent;
+```
+
+Connected to `Nette\Bridges\ApplicationLatte\TemplateFactory::$onCreate` event.
+
+```php
+use Contributte\Events\Extra\Event\Latte\TemplateCreateEvent;
+```
+
+**Nette Security events:**
+
+Connected to `Nette\Security\User` `$onLoggedIn` and `$onLoggedOut` events.
+
+```php
+use Contributte\Events\Extra\Event\Security\LoggedInEvent;
+use Contributte\Events\Extra\Event\Security\LoggedOutEvent;
+```
+
+## Subscriber
+
+```php
+use Contributte\Events\Extra\Event\Application\RequestEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+final class LogRequestSubscriber implements EventSubscriberInterface
+{
+
+    public static function getSubscribedEvents(): array
+    {
+        return [RequestEvent::class => 'onLog'];
+    }
+
+    public function onLog(RequestEvent $event): void
+    {
+        // Do magic..
+    }
+
+}
+```
+
 ## Development
 
 See [how to contribute](https://contributte.org/contributing.html) to this package.
 
-This package is currently maintaining by these authors.
+This package is currently maintained by these authors.
 
 <a href="https://github.com/f3l1x">
   <img width="80" height="80" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=80">
